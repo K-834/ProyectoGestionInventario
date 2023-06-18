@@ -14,7 +14,9 @@ import java.sql.SQLException;
  */
 public class Conexion {
     //Esto es una conexion con BD
+    //Prueba 1    
     //Prueba 2 - encima
+
     private final String URL = "jdbc:mysql://localhost:3307/inventariodatos";
     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private final String USER = "root";
