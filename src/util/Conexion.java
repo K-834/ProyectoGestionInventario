@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author antho
  */
 public class Conexion {
-
+    //Esto es una conexion con BD
     private final String URL = "jdbc:mysql://localhost:3307/inventariodatos";
     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private final String USER = "root";
