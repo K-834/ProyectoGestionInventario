@@ -19,7 +19,7 @@ public class Conexion {
     //Prueba 1    
     //Prueba 2 - encima
 
-    private final String URL = "jdbc:mysql://localhost:3307/inventariodatos";
+    private final String URL = "jdbc:mysql://localhost:3306/inventariodatos";
     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private final String USER = "root";
     private final String PASS = "usbw";
