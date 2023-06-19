@@ -106,7 +106,7 @@ public class Eliminar extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Eliminar Producto");
+        jLabel2.setText("Eliminar Entrega");
 
         tblDatosEliminar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         tblDatosEliminar.setModel(new javax.swing.table.DefaultTableModel(
@@ -318,7 +318,7 @@ public class Eliminar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(249, 249, 249))
+                .addGap(265, 265, 265))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

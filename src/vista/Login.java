@@ -241,7 +241,7 @@ public class Login extends javax.swing.JFrame {
         try {
             Usuario adm = dao.adminLogin(usuario, pass);
             Usuario admNam = dao.adminNombre(usuario, pass);
-            if (adm.getCodigo().equals(usuario) || adm.getContraseña().equals(pass) && adm.getNivelSeguridad() >= 1) {
+            if ((adm.getCodigo().equals(usuario) || adm.getContraseña().equals(pass)) && adm.getNivelSeguridad() == 1) {
                 Memoria.put("nomb", admNam.getNombre());
                 Memoria.put("nivel", adm.getNivelSeguridad());
                 Memoria.put("codigoEmpleado", adm.getCodigo());
@@ -252,6 +252,13 @@ public class Login extends javax.swing.JFrame {
                 dataH.setDescripcion("");
                 daoH.userInsertar(dataH);
                 Menu.main(null);
+                this.dispose();
+            }
+            if ((adm.getCodigo().equals(usuario) || adm.getContraseña().equals(pass)) && adm.getNivelSeguridad() == 2) {
+                Memoria.put("nomb", admNam.getNombre());
+                Memoria.put("nivel", adm.getNivelSeguridad());
+                Memoria.put("codigoEmpleado", adm.getCodigo());
+                Menu_admin.main(null);
                 this.dispose();
             }
         } catch (Exception e) {
