@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista;
+package vista.entrega;
 
 import dao.DaoDatos;
 import dao.DaoHistorial;
@@ -23,6 +23,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import util.Memoria;
+import vista.LoginAdmin;
+import vista.Menu;
 
 /**
  *
@@ -274,8 +276,7 @@ public class Añadir extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(boxAlm3)
                                 .addGap(28, 28, 28)
-                                .addComponent(boxAlm4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(boxAlm4)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

@@ -5,6 +5,7 @@
 package vista;
 
 //import entidades.Administrador;
+import vista.entrega.Editar;
 import dao.DaoAdmin;
 import dao.impl.DaoImplAdmin;
 import entidades.Usuario;
