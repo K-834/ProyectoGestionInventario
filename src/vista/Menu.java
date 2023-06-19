@@ -81,7 +81,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(24, Short.MAX_VALUE)
+                        .addContainerGap(65, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +181,6 @@ public class Menu extends javax.swing.JFrame {
         jButton5.setText("Perfil");
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/problema_icon.png"))); // NOI18N
-        jLabel9.setText("jLabel9");
 
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
         jButton6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -216,12 +215,12 @@ public class Menu extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(163, 163, 163)
+                                        .addGap(157, 157, 157)
                                         .addComponent(jLabel9))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(154, 154, 154)
                                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(146, 146, 146)
+                                .addGap(122, 122, 122)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel10)))
