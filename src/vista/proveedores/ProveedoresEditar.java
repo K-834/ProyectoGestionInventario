@@ -4,17 +4,39 @@
  */
 package vista.proveedores;
 
+import dao.DaoProveedores;
+import dao.impl.DaoImplProveedores;
+import entidades.Proveedores;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Anghello
  */
 public class ProveedoresEditar extends javax.swing.JFrame {
 
+    
+    private DaoProveedores daoP;
+    private Proveedores daoProve;
+    private List<Proveedores> listaProvee;
+    
+    public JTable table;
+    public DefaultTableModel model;
     /**
      * Creates new form Proveedores
      */
     public ProveedoresEditar() {
-        initComponents();
+                initComponents();
+        
+        daoP = new DaoImplProveedores();
+        daoProve = new Proveedores();
+        model = (DefaultTableModel) tblAñadirProve.getModel();
+
+
+        proveedoresSelect();
+        jLabelValidar.setText("");
     }
 
     /**
@@ -44,13 +66,13 @@ public class ProveedoresEditar extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAñadirProve = new javax.swing.JTable();
         jTextField8 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelValidar = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,7 +125,7 @@ public class ProveedoresEditar extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAñadirProve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -111,7 +133,7 @@ public class ProveedoresEditar extends javax.swing.JFrame {
                 "ID proveedor", "Nombre", "RUC", "Dirección", "Número", "Email", "Número", "Notas"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAñadirProve);
 
         jTextField8.setText("jTextField1");
 
@@ -149,9 +171,9 @@ public class ProveedoresEditar extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Dice si es valido");
+        jLabelValidar.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelValidar.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelValidar.setText("Dice si es valido");
 
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
         jButton6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -208,7 +230,7 @@ public class ProveedoresEditar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelValidar)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextField2)
@@ -241,7 +263,7 @@ public class ProveedoresEditar extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelValidar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -357,6 +379,30 @@ public class ProveedoresEditar extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -375,16 +421,15 @@ public class ProveedoresEditar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelValidar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -393,5 +438,6 @@ public class ProveedoresEditar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable tblAñadirProve;
     // End of variables declaration//GEN-END:variables
 }

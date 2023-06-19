@@ -4,17 +4,42 @@
  */
 package vista.proveedores;
 
+import dao.DaoProveedores;
+import dao.impl.DaoImplProveedores;
+import entidades.Proveedores;
+//import vista.Menu;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+//import javax.swing.table.TableRowSorter;
+//import vista.LoginAdmin;
+
 /**
  *
  * @author Anghello
  */
 public class ProveedoresAñadir extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Proveedores
-     */
+    private DaoProveedores daoP;
+    private Proveedores daoProve;
+    private List<Proveedores> listaProvee;
+    
+    public JTable table;
+    public DefaultTableModel model;
+
+    
     public ProveedoresAñadir() {
         initComponents();
+        
+        daoP = new DaoImplProveedores();
+        daoProve = new Proveedores();
+        model = (DefaultTableModel) tblAñadirProve.getModel();
+
+
+        proveedoresSelect();
+        jLabelValidar.setText("");
+        
     }
 
     /**
@@ -36,21 +61,22 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtNomProvee = new javax.swing.JTextField();
+        txtRUC = new javax.swing.JTextField();
+        txtDirecProvee = new javax.swing.JTextField();
+        txtTeleProvee = new javax.swing.JTextField();
+        txtEmailProvee = new javax.swing.JTextField();
+        txtIdentiProvee = new javax.swing.JTextField();
+        txtNotes = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField8 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        tblAñadirProve = new javax.swing.JTable();
+        txtProveeID = new javax.swing.JTextField();
+        comboBoxIdenProvee = new javax.swing.JComboBox<>();
+        jButtonAñadir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabelValidar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,26 +109,13 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel11.setText("Notas:");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-
-        jTextField4.setText("jTextField1");
-
-        jTextField5.setText("jTextField1");
-
-        jTextField6.setText("jTextField1");
-
-        jTextField7.setText("jTextField1");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtNotes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtNotesActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAñadirProve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -110,23 +123,27 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
                 "ID proveedor", "Nombre", "RUC", "Dirección", "Número", "Email", "Número", "Notas"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAñadirProve);
 
-        jTextField8.setText("jTextField1");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "Pasaporte", "Licencia de conducir" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        txtProveeID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                txtProveeIDActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jButton1.setText("Añadir Proveedor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxIdenProvee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "Pasaporte", "Licencia de conducir" }));
+        comboBoxIdenProvee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                comboBoxIdenProveeActionPerformed(evt);
+            }
+        });
+
+        jButtonAñadir.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonAñadir.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jButtonAñadir.setText("Añadir Proveedor");
+        jButtonAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAñadirActionPerformed(evt);
             }
         });
 
@@ -157,6 +174,10 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
             }
         });
 
+        jLabelValidar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabelValidar.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelValidar.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,11 +190,11 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3))
+                                .addComponent(txtDirecProvee))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(56, 56, 56)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtEmailProvee, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -181,23 +202,23 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(26, 26, 26)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNomProvee, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4))
-                    .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProveeID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(53, 53, 53)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField4)
-                        .addComponent(jTextField6)
-                        .addComponent(jComboBox1, 0, 235, Short.MAX_VALUE))
+                        .addComponent(txtRUC)
+                        .addComponent(txtTeleProvee)
+                        .addComponent(txtIdentiProvee)
+                        .addComponent(comboBoxIdenProvee, 0, 235, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonAñadir)
                         .addGap(58, 58, 58)))
                 .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -216,7 +237,9 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(546, 546, 546))
+                        .addGap(323, 323, 323)
+                        .addComponent(jLabelValidar)
+                        .addGap(186, 186, 186))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(373, 373, 373))))
@@ -229,41 +252,42 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProveeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValidar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomProvee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDirecProvee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTeleProvee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtEmailProvee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboBoxIdenProvee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(5, 5, 5)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdentiProvee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonAñadir)
                         .addGap(84, 84, 84))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,20 +315,46 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txtNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txtNotesActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboBoxIdenProveeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxIdenProveeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboBoxIdenProveeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (!txtProveeID.getText().isBlank()
+                && !txtNomProvee.getText().isBlank()
+                && !txtRUC.getText().isBlank()
+                && !txtDirecProvee.getText().isBlank()
+                && !txtTeleProvee.getText().isBlank()
+                && !txtEmailProvee.getText().isBlank()
+                && !txtNotes.getText().isBlank()
+                && comboBoxIdenProvee.getSelectedItem() != null){
+
+            proveedores();
+            txtProveeID.setText("");
+            txtNomProvee.setText("");
+            txtRUC.setText("");
+            txtDirecProvee.setText("");
+            txtTeleProvee.setText("");
+            txtEmailProvee.setText("");
+            txtNotes.setText("");
+            comboBoxIdenProvee.setSelectedIndex(-1);// |/
+            proveedoresSelect();
+        } else {
+            JOptionPane.showMessageDialog(null, "Falta Ingresar datos",
+                    "Información",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButtonAñadirActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        //vistaMenu();
+       // this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -314,6 +364,26 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtProveeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProveeIDActionPerformed
+             try {
+            daoProve.setIdProvee(txtProveeID.getText().toUpperCase());
+            daoP.proveedoresSelect(daoProve);
+
+            if (daoP.getNombre() != null) {
+                jLabelValidar.setText("Es valido : " + daoP.getNombre());
+                jButtonAñadir.setEnabled(true);
+
+            } else {
+                jButtonAñadir.setEnabled(false);
+                jLabelValidar.setText("No es valido");
+            }
+
+        } catch (Exception e) {
+        }
+
+    
+    }//GEN-LAST:event_txtProveeIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,21 +418,104 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProveedoresAñadir().setVisible(true);
+                Proveedores provee = new Proveedores();
+                ProveedoresAñadir ProveeAña = new ProveedoresAñadir();
+                ProveeAña.setLocationRelativeTo(null);
+                ProveeAña.setVisible(true);
             }
         });
     }
 
+   private void proveedores() {
+
+
+    String identiProvee = "";
+    Object seleccion = comboBoxIdenProvee.getSelectedItem();
+    if (seleccion != null) {
+        if (seleccion.equals("DNI")) {
+            identiProvee = "DNI";
+        } else if (seleccion.equals("Pasaporte")) {
+            identiProvee = "Pasaporte";
+        } else if (seleccion.equals("Licencia de conducir")) {
+            identiProvee = "Licencia de conducir";
+        }
+}
+
+        daoProve.setIdProvee(txtProveeID.getText().toUpperCase());
+        daoProve.setNombre(txtNomProvee.getText());
+        daoProve.setDireccion(txtDirecProvee.getText());
+        daoProve.setEmail(txtEmailProvee.getText());
+        daoProve.setNotas(txtNotes.getText());
+        daoProve.setNumIde(identiProvee);
+        daoProve.setRuc(Integer.parseInt(txtRUC.getText()));
+        daoProve.setCelular(Integer.parseInt(txtTeleProvee.getText()));
+
+        daoP.proveedoresInsertar(daoProve); //???
+
+
+
+    }
+
+    private void vistaMenu() {
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        this.dispose();
+    }
+
+    private void proveedoresSelect() {
+        listaProvee = daoP.proveedoresSelect();
+        model.setRowCount(0);
+        for (Proveedores daoProv : listaProvee) {
+            Object[] objeto = new Object[7];
+            objeto[0] = daoProv.getIdProvee();
+            objeto[1] = daoProv.getNombre();
+            objeto[2] = daoProv.getDireccion();
+            objeto[3] = daoProv.getEmail();
+            objeto[4] = daoProv.getNotas();
+            objeto[5] = daoProv.getNumIde();
+            objeto[6] = daoProv.getRuc();
+            objeto[7] = daoProv.getCelular();
+            model.addRow(objeto);
+
+        }
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> comboBoxIdenProvee;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonAñadir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -372,16 +525,18 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelValidar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable tblAñadirProve;
+    private javax.swing.JTextField txtDirecProvee;
+    private javax.swing.JTextField txtEmailProvee;
+    private javax.swing.JTextField txtIdentiProvee;
+    private javax.swing.JTextField txtNomProvee;
+    private javax.swing.JTextField txtNotes;
+    private javax.swing.JTextField txtProveeID;
+    private javax.swing.JTextField txtRUC;
+    private javax.swing.JTextField txtTeleProvee;
     // End of variables declaration//GEN-END:variables
 }
+
