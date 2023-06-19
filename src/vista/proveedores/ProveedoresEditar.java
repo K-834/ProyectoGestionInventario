@@ -64,7 +64,7 @@ public class ProveedoresEditar extends javax.swing.JFrame {
         jLabel3.setText("ID cliente:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel4.setText("RUC");
+        jLabel4.setText("RUC:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel5.setText("Nombre del proveedor:");

@@ -45,7 +45,7 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID proveedor", "Nombre", "Apellido", "Dirección", "Número", "Email", "Número", "Notas"
+                "ID proveedor", "Nombre", "RUC", "Dirección", "Número", "Email", "Número", "Notas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
