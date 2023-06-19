@@ -14,18 +14,21 @@ public class Historial {
     private String idUsuario;
     private String historial;
     private String fechaCambio;
+    private String descripcion; 
 
     public Historial() {
     }
 
-    public Historial(int idCambio, int idStock, String idUsuario, String historial, String fechaCambio) {
+    public Historial(int idCambio, int idStock, String idUsuario, String historial, String fechaCambio, String descripcion) {
         this.idCambio = idCambio;
         this.idStock = idStock;
         this.idUsuario = idUsuario;
         this.historial = historial;
         this.fechaCambio = fechaCambio;
+        this.descripcion = descripcion;
     }
 
+    
     public String getFechaCambio() {
         return fechaCambio;
     }
@@ -64,6 +67,14 @@ public class Historial {
 
     public void setHistorial(String historial) {
         this.historial = historial;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }

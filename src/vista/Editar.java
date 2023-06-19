@@ -415,8 +415,9 @@ public class Editar extends javax.swing.JFrame {
                     "Entrega: " +strFechaEntrega ;
             dataH.setIdStock(seleccionFila);
             dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
-            dataH.setHistorial("EDITADO:\n Permiso:"+ Memoria.get("autorizacion")+" ("+ Memoria.get("codAdmin") +")\n Antes: \n "+ antesH + " \n Ahora: \n" + ahoraH);
+            dataH.setHistorial("EDITADO");
             dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+            dataH.setDescripcion("Permiso:"+ Memoria.get("autorizacion")+" ("+ Memoria.get("codAdmin") +")\n Antes: \n "+ antesH + " \n Ahora: \n" + ahoraH);
             daoH.userInsertar(dataH);
 
             SeleccionBtn(valido);

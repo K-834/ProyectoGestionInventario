@@ -5,12 +5,15 @@
 package vista;
 
 import dao.DaoAdmin;
+import dao.DaoHistorial;
 import dao.impl.DaoImplAdmin;
+import dao.impl.DaoImplHistorial;
+import entidades.Historial;
 import entidades.Usuario;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import util.Memoria;
-
-
 
 /**
  *
@@ -21,9 +24,16 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form login
      */
+    private DaoHistorial daoH;
+    private Historial dataH;
+    DateTimeFormatter formato2;
+
     public Login() {
 
         initComponents();
+        formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        daoH = new DaoImplHistorial();
+        dataH = new Historial();
     }
 
     /**
@@ -227,22 +237,27 @@ public class Login extends javax.swing.JFrame {
         String usuario = jTextField1.getText();
         String pass = jPasswordField1.getText();
         DaoAdmin dao = new DaoImplAdmin();
-        
+
         try {
-            Usuario adm = dao.adminLogin(usuario,pass);
+            Usuario adm = dao.adminLogin(usuario, pass);
             Usuario admNam = dao.adminNombre(usuario, pass);
-            if (adm.getCodigo().equals(usuario) || adm.getContraseña().equals(pass)&& adm.getNivelSeguridad()>=1 )  {
+            if (adm.getCodigo().equals(usuario) || adm.getContraseña().equals(pass) && adm.getNivelSeguridad() >= 1) {
                 Memoria.put("nomb", admNam.getNombre());
                 Memoria.put("nivel", adm.getNivelSeguridad());
                 Memoria.put("codigoEmpleado", adm.getCodigo());
+                dataH.setIdStock(0);
+                dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
+                dataH.setHistorial("Logeado");
+                dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+                dataH.setDescripcion("");
+                daoH.userInsertar(dataH);
                 Menu.main(null);
                 this.dispose();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS ",
-                "ERROR ",
-                JOptionPane.ERROR_MESSAGE);
-            
+                    "ERROR ",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnIngresrActionPerformed
@@ -291,8 +306,8 @@ public class Login extends javax.swing.JFrame {
                 Login log = new Login();
                 log.setVisible(true);
                 log.setLocationRelativeTo(null);
-               
-               // new Login().setVisible(true);
+
+                // new Login().setVisible(true);
             }
         });
     }

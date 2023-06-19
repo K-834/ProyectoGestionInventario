@@ -170,6 +170,7 @@ public class Recuperar extends javax.swing.JFrame {
             dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
             dataH.setHistorial("RECUPERADO");
             dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+            dataH.setDescripcion("");
             daoH.userInsertar(dataH);
             
 
