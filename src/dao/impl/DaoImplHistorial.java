@@ -72,14 +72,16 @@ public class DaoImplHistorial implements DaoHistorial{
                 .append("idStock, ")
                 .append("idUsuario, ")
                 .append("historial, ")
-                .append("fechaCambio ")
-                .append(") VALUES (?,?,?,?)");
+                .append("fechaCambio, ")
+                .append("descripcion ")
+                .append(") VALUES (?,?,?,?,?)");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ps.setInt(1, histo.getIdStock());
             ps.setString(2, histo.getIdUsuario());
             ps.setString(3, histo.getHistorial());
             ps.setString(4, histo.getFechaCambio());
+            ps.setString(5, histo.getDescripcion());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
                 mensaje = "Cero registros agregados";

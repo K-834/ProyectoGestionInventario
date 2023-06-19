@@ -516,6 +516,7 @@ public class Añadir extends javax.swing.JFrame {
             dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
             dataH.setHistorial("AÑADIR: \n" + ahoraH);
             dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+            dataH.setDescripcion("");
             daoH.userInsertar(dataH);
 
 

@@ -383,6 +383,7 @@ public class Eliminar extends javax.swing.JFrame {
             dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
             dataH.setHistorial("ELIMINADO");
             dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+            dataH.setDescripcion("");
             daoH.userInsertar(dataH);
 
         } else {
