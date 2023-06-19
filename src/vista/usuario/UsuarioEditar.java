@@ -4,17 +4,40 @@
  */
 package vista.usuario;
 
+import dao.DaoUsuario;
+import dao.impl.DaoImplUsuario;
+import entidades.Usuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import vista.Menu_administrador;
+
 /**
  *
  * @author acer
  */
 public class UsuarioEditar extends javax.swing.JFrame {
 
+    private DaoUsuario dao;
+    private List<Usuario> lista;
+    public JTable table;
+    public DefaultTableModel model;
+    private Usuario data;
+    boolean dato = false;
+
     /**
      * Creates new form UsuarioEditar
      */
     public UsuarioEditar() {
         initComponents();
+        dao = new DaoImplUsuario();
+        data = new Usuario();
+
+        model = (DefaultTableModel) tblEditar.getModel();
+
+        datosSelect();
+
     }
 
     /**
@@ -30,26 +53,21 @@ public class UsuarioEditar extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtProducto = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
         jlblID = new javax.swing.JLabel();
-        lblAdminAutorizacion = new javax.swing.JLabel();
-        lblValidar = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnValidar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtCantidad1 = new javax.swing.JTextField();
-        txtCantidad2 = new javax.swing.JTextField();
-        txtCantidad3 = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtCantidad4 = new javax.swing.JTextField();
+        txtContra = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblAñadir = new javax.swing.JTable();
+        tblEditar = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,10 +97,6 @@ public class UsuarioEditar extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("ID:");
-
         jLabel7.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Nombre                :");
@@ -101,25 +115,9 @@ public class UsuarioEditar extends javax.swing.JFrame {
         jlblID.setForeground(new java.awt.Color(255, 255, 255));
         jlblID.setText("-");
 
-        lblAdminAutorizacion.setForeground(new java.awt.Color(255, 0, 0));
-        lblAdminAutorizacion.setText("jLabel2");
-
-        lblValidar.setForeground(new java.awt.Color(255, 51, 51));
-        lblValidar.setText("jLabel2");
-
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Codigo Us            :");
-
-        btnValidar.setBackground(new java.awt.Color(0, 0, 0));
-        btnValidar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnValidar.setForeground(new java.awt.Color(255, 255, 255));
-        btnValidar.setText("Validar");
-        btnValidar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValidarActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Codigo Usuario   :");
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,110 +135,83 @@ public class UsuarioEditar extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Contraseña         :");
 
-        tblAñadir.setModel(new javax.swing.table.DefaultTableModel(
+        tblEditar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Codigo del Us", "Nombre", "Apellido", "Correo", "Telefono", "Contraseña"
+                "Codigo Usuario", "Nombre", "Apellido", "Correo", "Telefono", "Contraseña"
             }
         ));
-        jScrollPane1.setViewportView(tblAñadir);
+        jScrollPane1.setViewportView(tblEditar);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(23, 23, 23)
-                            .addComponent(lblAdminAutorizacion)
-                            .addGap(320, 320, 320)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtCantidad3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                .addComponent(txtCantidad2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCantidad1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtProducto, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCantidad4))
-                            .addGap(18, 18, 18)
+                            .addGap(561, 561, 561)
+                            .addComponent(jButton1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(231, 231, 231)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(201, 201, 201)
+                            .addComponent(btnSeleccionar)
+                            .addGap(62, 62, 62)
+                            .addComponent(btnEditar))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(140, 140, 140)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnValidar)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lblValidar)
-                                    .addGap(25, 25, 25))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1))
-                            .addGap(8, 8, 8)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jlblID)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(btnSeleccionar)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnEditar)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel10))
+                            .addGap(41, 41, 41)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlblID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtContra))))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(lblAdminAutorizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlblID, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jlblID))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValidar)
-                    .addComponent(jLabel4))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblValidar)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidad4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -258,15 +229,13 @@ public class UsuarioEditar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -274,53 +243,16 @@ public class UsuarioEditar extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (dato) {
-            LocalDateTime fechaIngreso = txtDteFechaIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            System.out.println(fechaIngreso);
-            int seleccionFila = Integer.parseInt(tblEditar.getValueAt(tblEditar.getSelectedRow(), 0).toString());
-
-            LocalDateTime fechaEntrega = fechaIngreso.plusDays(7);
-            LocalDate localFechaEntrega = fechaEntrega.toLocalDate();
-
-            String strFechaEntrega = fechaIngreso.format(formatter);
-            String strFechaCaducidad = localFechaEntrega.plusDays(7).format(formatter);
-
-            String almacen = "";
-            if (boxAlm1.isSelected()) {
-                almacen = "ALMACEN 1";
-            } else if (boxAlm2.isSelected()) {
-                almacen = "ALMACEN 2";
-            } else if (boxAlm3.isSelected()) {
-                almacen = "ALMACEN 3";
-            } else if (boxAlm4.isSelected()) {
-                almacen = "ALMACEN 4";
-            }
-
-            data.setCodProducto(txtProducto.getText());
-            data.setCantidad(Integer.parseInt(txtCantidad.getText()));
-
-            data.setFechaIngreso(strFechaEntrega);
-            data.setFechaCaducidad(strFechaCaducidad);
-
-            data.setUbicacion(almacen);
-            data.setIdStock(seleccionFila);
-
-            dao.datosEditar(data);
+            data.setCodigo(jlblID.getText());
+            data.setNombre(txtNombre.getText());
+            data.setApellido(txtApellido.getText());
+            data.setCorreo(txtCorreo.getText());
+            data.setTelefono(Integer.parseInt(txtTelefono.getText()));
+            data.setContraseña(txtContra.getText());
+            dao.UsuarioEditar(data);
             dato = false;
             model.setRowCount(0);
             datosSelect();
-            ahoraH ="ID: " +jlblID.getText()+ "\n " +
-            "Producto: " +txtProducto.getText()+ "\n " +
-            "Cantidad: " +txtCantidad.getText()+ "\n " +
-            "Almacen: " +almacen+"\n " +
-            "Entrega: " +strFechaEntrega ;
-            dataH.setIdStock(seleccionFila);
-            dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
-            dataH.setHistorial("EDITADO");
-            dataH.setFechaCambio(LocalDateTime.now().format(formato2));
-            dataH.setDescripcion("Permiso:"+ Memoria.get("autorizacion")+" ("+ Memoria.get("codAdmin") +")\n Antes: \n "+ antesH + " \n Ahora: \n" + ahoraH);
-            daoH.userInsertar(dataH);
-
-            SeleccionBtn(valido);
 
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Información", JOptionPane.ERROR_MESSAGE);
@@ -329,67 +261,24 @@ public class UsuarioEditar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        vistaMenu();
+        Menu_administrador.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         try {
             jlblID.setText(model.getValueAt(tblEditar.getSelectedRow(), 0).toString());
-            txtProducto.setText(model.getValueAt(tblEditar.getSelectedRow(), 1).toString());
-            txtCantidad.setText(model.getValueAt(tblEditar.getSelectedRow(), 2).toString());
-            String fecha = model.getValueAt(tblEditar.getSelectedRow(), 3).toString();
-            String tipoAlmacen = (String) tblEditar.getValueAt(tblEditar.getSelectedRow(), 5);
-            if ("ALMACEN 1".equals(tipoAlmacen)) {
-                boxAlm1.setSelected(true);
-            } else if ("ALMACEN 2".equals(tipoAlmacen)) {
-                boxAlm2.setSelected(true);
-            } else if ("ALMACEN 3".equals(tipoAlmacen)) {
-                boxAlm3.setSelected(true);
-            } else if ("ALMACEN 4".equals(tipoAlmacen)) {
-                boxAlm4.setSelected(true);
-            }
-
-            LocalDate fechaCambio = LocalDate.parse(fecha, formatter);
-
-            int dia = fechaCambio.getDayOfMonth();
-            int mes = fechaCambio.getMonthValue();
-            int año = fechaCambio.getYear();
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(año, mes - 1, dia);
-
-            txtDteFechaIngreso.setCalendar(calendar);
-            antesH ="ID: "+ jlblID.getText()+ "\n " +
-            "Producto: "+ txtProducto.getText()+ "\n " +
-            "Cantidad: "+ txtCantidad.getText()+ "\n " +
-            "Almacen: " +tipoAlmacen+"\n " +
-            "Entrega: "+ fecha;
-            btnValidar.setEnabled(true);
+            txtNombre.setText(model.getValueAt(tblEditar.getSelectedRow(), 1).toString());
+            txtApellido.setText(model.getValueAt(tblEditar.getSelectedRow(), 2).toString());
+            txtCorreo.setText(model.getValueAt(tblEditar.getSelectedRow(), 3).toString());
+            txtTelefono.setText(model.getValueAt(tblEditar.getSelectedRow(), 4).toString());
+            txtContra.setText(model.getValueAt(tblEditar.getSelectedRow(), 5).toString());
             dato = true;
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Información", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
-
-    private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        // TODO add your handling code here:
-        try {
-            daoV.setCodProducto(txtProducto.getText());
-            daoP.datosSelect(daoV);
-            lblValidar.setText("Es valido : " + daoV.getNombre());
-            SeleccionBtn(!valido);
-
-            if (daoV.getNombre() == null) {
-                btnEditar.setEnabled(false);
-                lblValidar.setText("No es valido");
-            }
-
-        } catch (Exception e) {
-
-        }
-    }//GEN-LAST:event_btnValidarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,19 +311,36 @@ public class UsuarioEditar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioEditar().setVisible(true);
+                UsuarioEditar vista = new UsuarioEditar();
+                vista.setLocationRelativeTo(null);
+                vista.setVisible(true);
             }
         });
     }
 
+    private void datosSelect() {
+        lista = dao.UsuarioSelect();
+        model.setRowCount(0);
+        for (Usuario dat : lista) {
+            Object[] objeto = new Object[6];
+            objeto[0] = dat.getCodigo();
+            objeto[1] = dat.getNombre();
+            objeto[2] = dat.getApellido();
+            objeto[3] = dat.getCorreo();
+            objeto[4] = dat.getTelefono();
+            objeto[5] = dat.getContraseña();
+            model.addRow(objeto);
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JButton btnValidar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -443,14 +349,11 @@ public class UsuarioEditar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlblID;
-    private javax.swing.JLabel lblAdminAutorizacion;
-    private javax.swing.JLabel lblValidar;
-    private javax.swing.JTable tblAñadir;
-    private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCantidad1;
-    private javax.swing.JTextField txtCantidad2;
-    private javax.swing.JTextField txtCantidad3;
-    private javax.swing.JTextField txtCantidad4;
-    private javax.swing.JTextField txtProducto;
+    private javax.swing.JTable tblEditar;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtContra;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

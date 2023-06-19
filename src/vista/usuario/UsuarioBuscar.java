@@ -4,17 +4,40 @@
  */
 package vista.usuario;
 
+import dao.DaoDatos;
+import dao.DaoUsuario;
+import dao.impl.DaoImplDatos;
+import dao.impl.DaoImplUsuario;
+import entidades.Datos;
+import entidades.Usuario;
+import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import vista.Menu_administrador;
+
 /**
  *
  * @author acer
  */
 public class UsuarioBuscar extends javax.swing.JFrame {
-
+     private DaoUsuario dao;
+    private List<Usuario> lista;
+    private DefaultTableModel model;
+    private Usuario data;
+    TableRowSorter<DefaultTableModel> obj;
     /**
      * Creates new form UsuarioBuscar
      */
     public UsuarioBuscar() {
         initComponents();
+        model = (DefaultTableModel) tblBuscar.getModel();
+        obj = new TableRowSorter<>(model);
+        dao = new DaoImplUsuario();
+        data = new Usuario();
+        tblBuscar.setRowSorter(obj);
+
+        datosSelect();
     }
 
     /**
@@ -30,9 +53,9 @@ public class UsuarioBuscar extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        id = new javax.swing.JTextField();
+        Id = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblAñadir = new javax.swing.JTable();
+        tblBuscar = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,18 +81,18 @@ public class UsuarioBuscar extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Busqueda:");
 
-        id.addActionListener(new java.awt.event.ActionListener() {
+        Id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
+                IdActionPerformed(evt);
             }
         });
-        id.addKeyListener(new java.awt.event.KeyAdapter() {
+        Id.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                idKeyPressed(evt);
+                IdKeyPressed(evt);
             }
         });
 
-        tblAñadir.setModel(new javax.swing.table.DefaultTableModel(
+        tblBuscar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -77,7 +100,7 @@ public class UsuarioBuscar extends javax.swing.JFrame {
                 "ID", "Codigo del Us", "Nombre", "Apellido", "Correo", "Telefono", "Contraseña"
             }
         ));
-        jScrollPane1.setViewportView(tblAñadir);
+        jScrollPane1.setViewportView(tblBuscar);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +112,7 @@ public class UsuarioBuscar extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -110,13 +133,13 @@ public class UsuarioBuscar extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel1)))
-                .addGap(42, 42, 42)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(101, 101, 101)
+                    .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,18 +158,19 @@ public class UsuarioBuscar extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        vistaMenu();
+        Menu_administrador.main(null);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+    private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idActionPerformed
+    }//GEN-LAST:event_IdActionPerformed
 
-    private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
+    private void IdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdKeyPressed
 
-        obj.setRowFilter(RowFilter.regexFilter(id.getText()));
+        obj.setRowFilter(RowFilter.regexFilter(Id.getText()));
 
-    }//GEN-LAST:event_idKeyPressed
+    }//GEN-LAST:event_IdKeyPressed
 
     /**
      * @param args the command line arguments
@@ -183,14 +207,28 @@ public class UsuarioBuscar extends javax.swing.JFrame {
             }
         });
     }
+    private void datosSelect() {
+       lista = dao.UsuarioSelect();
+        model.setRowCount(0);
+        for (Usuario dat : lista) {
+            Object[] objeto = new Object[6];
+            objeto[0] = dat.getCodigo();
+            objeto[1] = dat.getNombre();
+            objeto[2] = dat.getApellido();
+            objeto[3] = dat.getCorreo();
+            objeto[4] = dat.getTelefono();
+            objeto[5] = dat.getContraseña();
+            model.addRow(objeto);
+        }
 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Id;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblAñadir;
+    private javax.swing.JTable tblBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,21 +13,20 @@ import java.util.List;
  */
 public class Usuario {
     
-    private int id;
+    private int estado;
     private String codigo;
     private String nombre;
     private String apellido;
     private String correo;
-    private String telefono;
+    private int telefono;
     private int nivelSeguridad;
     private String contraseña;
 
     public Usuario() {
     }
-    
 
-    public Usuario(int id, String codigo, String nombre, String apellido, String correo, String telefono, int nivelSeguridad, String contraseña) {
-        this.id = id;
+    public Usuario(int estado, String codigo, String nombre, String apellido, String correo, int telefono, int nivelSeguridad, String contraseña) {
+        this.estado = estado;
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -36,6 +35,9 @@ public class Usuario {
         this.nivelSeguridad = nivelSeguridad;
         this.contraseña = contraseña;
     }
+    
+
+   
 
     
     public String getNombre() {
@@ -62,14 +64,7 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
+   
     public String getCodigo() {
         return codigo;
     }
@@ -95,11 +90,27 @@ public class Usuario {
     }
 
     public int getId() {
-        return id;
+        return estado;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.estado = id;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
     

@@ -2,52 +2,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista.entrega;
+package vista.usuario;
 
-import dao.DaoDatos;
-import dao.DaoHistorial;
-import dao.impl.DaoImplDatos;
-import dao.impl.DaoImplHistorial;
+
+import dao.DaoUsuario;
+import dao.impl.DaoImplUsuario;
 import entidades.Datos;
-import entidades.Historial;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import entidades.Usuario;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import util.Memoria;
+
 
 /**
  *
  * @author antho
  */
-public class Recuperar extends javax.swing.JFrame {
+public class UsuarioRecuperar extends javax.swing.JFrame {
 
-    private DaoDatos dao;
-    private List<Datos> lista;
+     private DaoUsuario dao;
+    private List<Usuario> lista;
     private DefaultTableModel model;
-    private Datos data;
-    
-    private DaoHistorial daoH;
-    private Historial dataH;
-    DateTimeFormatter formato;
-    DateTimeFormatter formato2;
+    private Usuario data;
     
 
     /**
      * Creates new form recuperar
      */
-    public Recuperar() {
+    public UsuarioRecuperar() {
         initComponents();
-        dao = new DaoImplDatos();
-        data = new Datos();
+        dao = new DaoImplUsuario();
+        data = new Usuario();
         model = (DefaultTableModel) tblDatosRecuperar.getModel();
-        
-        formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        daoH = new DaoImplHistorial();
-        dataH = new Historial();
-        
-        datosSelect();
         
     }
 
@@ -158,22 +144,15 @@ public class Recuperar extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            int seleccionFila = Integer.parseInt(tblDatosRecuperar.getValueAt(tblDatosRecuperar.getSelectedRow(), 0).toString());
-            data.setIdStock(seleccionFila);
-            dao.datosRecuperar(data);
+            String seleccionFila = tblDatosRecuperar.getValueAt(tblDatosRecuperar.getSelectedRow(), 0).toString();
+            data.setCodigo(seleccionFila);
+            dao.UsuarioRecuperar(data);
             model.setRowCount(0);
             datosSelect();
             JOptionPane.showMessageDialog(null, "Se ha recuperado exitosamente",
                     "Información",
                     JOptionPane.INFORMATION_MESSAGE);
-            dataH.setIdStock(seleccionFila);
-            dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
-            dataH.setHistorial("RECUPERADO");
-            dataH.setFechaCambio(LocalDateTime.now().format(formato2));
-            dataH.setDescripcion("");
-            daoH.userInsertar(dataH);
-            
-
+           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila",
                     "Información",
@@ -184,7 +163,7 @@ public class Recuperar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Eliminar.main(null);
+        UsuarioEliminar.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -205,14 +184,16 @@ public class Recuperar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Recuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRecuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Recuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRecuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Recuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRecuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Recuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioRecuperar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -220,7 +201,7 @@ public class Recuperar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Datos data = new Datos();
-                Recuperar recu = new Recuperar();
+                UsuarioRecuperar recu = new UsuarioRecuperar();
                 recu.setLocationRelativeTo(null);
                 recu.setVisible(true);
                 //new recuperar().setVisible(true);
@@ -230,16 +211,16 @@ public class Recuperar extends javax.swing.JFrame {
     }
 
     private void datosSelect() {
-        lista = dao.datosSelectEliminados();
+               lista = dao.UsuarioSelect();
         model.setRowCount(0);
-        for (Datos dat : lista) {
+        for (Usuario dat : lista) {
             Object[] objeto = new Object[6];
-            objeto[0] = dat.getIdStock();
-            objeto[1] = dat.getCodProducto();
-            objeto[2] = dat.getCantidad();
-            objeto[3] = dat.getFechaIngreso();
-            objeto[4] = dat.getFechaCaducidad();
-            objeto[5] = dat.getUbicacion();
+            objeto[0] = dat.getCodigo();
+            objeto[1] = dat.getNombre();
+            objeto[2] = dat.getApellido();
+            objeto[3] = dat.getCorreo();
+            objeto[4] = dat.getTelefono();
+            objeto[5] = dat.getContraseña();
             model.addRow(objeto);
         }
 
