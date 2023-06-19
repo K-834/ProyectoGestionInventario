@@ -4,9 +4,6 @@
  */
 package vista;
 
-import vista.entrega.Caduca;
-import vista.entrega.Eliminar;
-import vista.entrega.Añadir;
 import util.Memoria;
 
 /**
