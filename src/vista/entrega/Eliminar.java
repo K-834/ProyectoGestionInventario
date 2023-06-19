@@ -29,12 +29,11 @@ public class Eliminar extends javax.swing.JFrame {
     private DefaultTableModel model;
     private Datos data;
     private Boolean seleccion;
-    
+
     private DaoHistorial daoH;
     private Historial dataH;
     DateTimeFormatter formato;
     DateTimeFormatter formato2;
-    
 
     /**
      * Creates new form EliminarO
@@ -44,10 +43,10 @@ public class Eliminar extends javax.swing.JFrame {
         dao = new DaoImplDatos();
         data = new Datos();
         model = (DefaultTableModel) tblDatosEliminar.getModel();
-        
+
         formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-         
+
         daoH = new DaoImplHistorial();
         dataH = new Historial();
         datosSelect();
@@ -149,7 +148,7 @@ public class Eliminar extends javax.swing.JFrame {
 
         titulo4.setBackground(new java.awt.Color(0, 0, 0));
         titulo4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        titulo4.setText("   Fecha");
+        titulo4.setText("   Fecha Ingreso");
         titulo4.setAlignmentX(2.0F);
         titulo4.setAlignmentY(2.0F);
         titulo4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
@@ -219,45 +218,41 @@ public class Eliminar extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlblSelecciontxt, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar)
+                .addGap(18, 18, 18))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlblSelecciontxt, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar))
+                        .addGap(25, 25, 25)
+                        .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblProducto)
-                                .addGap(19, 19, 19)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(titulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79)
-                                .addComponent(titulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblCantidad)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblFecha)
-                                .addGap(26, 26, 26)))))
-                .addGap(18, 18, 18))
+                        .addGap(34, 34, 34)
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblProducto)
+                        .addGap(19, 19, 19)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCantidad)
+                    .addComponent(titulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha)
+                    .addComponent(titulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,25 +361,32 @@ public class Eliminar extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (seleccion) {
 
-            int seleccionFila = Integer.parseInt(tblDatosEliminar.getValueAt(tblDatosEliminar.getSelectedRow(), 0).toString());
-            data.setIdStock(seleccionFila);
-            dao.datosEliminar(data);
-            seleccion = false;
-            jlblSelecciontxt.setText("Se ha eliminado la fila");
-            jlblSelecciontxt.setForeground(Color.BLACK);
-            jlblSelecciontxt.getText();
-            model.setRowCount(0);
-            datosSelect();
-            JOptionPane.showMessageDialog(null, "Se ha eliminado Satisfactoriamente",
-                    "Información",
-                    JOptionPane.INFORMATION_MESSAGE);
-           
-            dataH.setIdStock(seleccionFila);
-            dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
-            dataH.setHistorial("ELIMINADO");
-            dataH.setFechaCambio(LocalDateTime.now().format(formato2));
-            dataH.setDescripcion("");
-            daoH.userInsertar(dataH);
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                int seleccionFila = Integer.parseInt(tblDatosEliminar.getValueAt(tblDatosEliminar.getSelectedRow(), 0).toString());
+                data.setIdStock(seleccionFila);
+                dao.datosEliminar(data);
+                seleccion = false;
+                jlblSelecciontxt.setText("Se ha eliminado la fila");
+                jlblSelecciontxt.setForeground(Color.BLACK);
+                jlblSelecciontxt.getText();
+                model.setRowCount(0);
+                datosSelect();
+                JOptionPane.showMessageDialog(null, "Se ha eliminado Satisfactoriamente",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                dataH.setIdStock(seleccionFila);
+                dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
+                dataH.setHistorial("ELIMINADO");
+                dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+                dataH.setDescripcion("");
+                daoH.userInsertar(dataH);
+
+            } else {
+
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila",

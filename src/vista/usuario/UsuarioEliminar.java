@@ -19,13 +19,15 @@ import vista.Menu_administrador;
  * @author acer
  */
 public class UsuarioEliminar extends javax.swing.JFrame {
+
     private DaoUsuario dao;
     private List<Usuario> lista;
     private DefaultTableModel model;
     private Usuario data;
     private Boolean seleccion;
-    
+
     DateTimeFormatter formato;
+
     /**
      * Creates new form UsarioEliminar
      */
@@ -34,7 +36,7 @@ public class UsuarioEliminar extends javax.swing.JFrame {
         dao = new DaoImplUsuario();
         data = new Usuario();
         model = (DefaultTableModel) tblDatosEliminar.getModel();
-        
+
         formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         datosSelect();
     }
@@ -483,31 +485,29 @@ public class UsuarioEliminar extends javax.swing.JFrame {
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(titulo13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(titulo15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(titulo15, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(13, 13, 13))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jlblSelecciontxt, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titulo17, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSeleccion)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addComponent(lblCell, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)))
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(btnSeleccion)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEliminar))
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblContra1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblContra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(18, 18, 18))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(titulo17, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCell, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblContra1)
+                                    .addComponent(lblContra, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(19, 19, 19))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,23 +521,21 @@ public class UsuarioEliminar extends javax.swing.JFrame {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(titulo16)
-                                    .addComponent(titulo14)
-                                    .addComponent(lblContra1))
+                                    .addComponent(titulo14))
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel9Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(lblID))
                                     .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblCell, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblContra, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE))
+                                        .addGap(24, 24, 24)
+                                        .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(titulo13)
                                 .addGap(23, 23, 23)
-                                .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCorreo))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSeleccion)
@@ -546,10 +544,16 @@ public class UsuarioEliminar extends javax.swing.JFrame {
                         .addGap(17, 17, 17))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(titulo17)
                             .addComponent(titulo15)
-                            .addComponent(titulo17))
-                        .addGap(23, 23, 23)
-                        .addComponent(lblCorreo)
+                            .addComponent(lblContra1))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(lblContra, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCell, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -645,7 +649,7 @@ public class UsuarioEliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
-        
+
     }//GEN-LAST:event_btnEliminar2ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -667,22 +671,22 @@ public class UsuarioEliminar extends javax.swing.JFrame {
 
     private void btnSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             lblID.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 0).toString());
             lblNombre.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 1).toString());
             lblApellido.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 2).toString());
             lblCorreo.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 3).toString());
             lblCell.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 4).toString());
             lblContra.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 5).toString());
-            
+
             seleccion = true;
             jlblSelecciontxt.setText("Se ha seleccionado una fila");
             jlblSelecciontxt.setForeground(Color.BLACK);
             jlblSelecciontxt.getText();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila en tabla",
-                "Información",
-                JOptionPane.INFORMATION_MESSAGE);
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
             jlblSelecciontxt.setText("No se ha seleccionado ninguna fila");
             jlblSelecciontxt.setForeground(Color.RED);
             jlblSelecciontxt.getText();
@@ -691,25 +695,32 @@ public class UsuarioEliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       if (seleccion) {
+        if (seleccion) {
 
-            String seleccionFila = tblDatosEliminar.getValueAt(tblDatosEliminar.getSelectedRow(), 0).toString();
-            data.setCodigo(seleccionFila);
-            dao.UsuarioEliminar(data);
-            seleccion = false;
-            jlblSelecciontxt.setText("Se ha eliminado la fila");
-            jlblSelecciontxt.setForeground(Color.BLACK);
-            jlblSelecciontxt.getText();
-            model.setRowCount(0);
-            datosSelect();
-            JOptionPane.showMessageDialog(null, "Se ha eliminado Satisfactoriamente",
-                "Información",
-                JOptionPane.INFORMATION_MESSAGE);
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+
+                String seleccionFila = tblDatosEliminar.getValueAt(tblDatosEliminar.getSelectedRow(), 0).toString();
+                data.setCodigo(seleccionFila);
+                dao.UsuarioEliminar(data);
+                seleccion = false;
+                jlblSelecciontxt.setText("Se ha eliminado la fila");
+                jlblSelecciontxt.setForeground(Color.BLACK);
+                jlblSelecciontxt.getText();
+                model.setRowCount(0);
+                datosSelect();
+                JOptionPane.showMessageDialog(null, "Se ha eliminado Satisfactoriamente",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila",
-                "Información",
-                JOptionPane.ERROR_MESSAGE);
+                    "Información",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -747,14 +758,14 @@ public class UsuarioEliminar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                 UsuarioEliminar vista = new UsuarioEliminar();
+                UsuarioEliminar vista = new UsuarioEliminar();
                 vista.setLocationRelativeTo(null);
                 vista.setVisible(true);
             }
         });
     }
-    
-     private void datosSelect() {
+
+    private void datosSelect() {
         lista = dao.UsuarioSelect();
         model.setRowCount(0);
         for (Usuario dat : lista) {

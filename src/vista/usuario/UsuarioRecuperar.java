@@ -34,7 +34,7 @@ public class UsuarioRecuperar extends javax.swing.JFrame {
         dao = new DaoImplUsuario();
         data = new Usuario();
         model = (DefaultTableModel) tblDatosRecuperar.getModel();
-        
+        datosSelect();
     }
 
     /**
@@ -59,14 +59,11 @@ public class UsuarioRecuperar extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Recuperar Entrega");
+        jLabel2.setText("Recuperar Usuario");
 
         tblDatosRecuperar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Producto", "Cantidad", "Fecha Entrega", "Fecha Caducidad", "Ubicación"
@@ -200,7 +197,6 @@ public class UsuarioRecuperar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Datos data = new Datos();
                 UsuarioRecuperar recu = new UsuarioRecuperar();
                 recu.setLocationRelativeTo(null);
                 recu.setVisible(true);
@@ -211,7 +207,7 @@ public class UsuarioRecuperar extends javax.swing.JFrame {
     }
 
     private void datosSelect() {
-               lista = dao.UsuarioSelect();
+               lista = dao.UsuarioSelectEliminados();
         model.setRowCount(0);
         for (Usuario dat : lista) {
             Object[] objeto = new Object[6];
