@@ -107,6 +107,8 @@ public class Editar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtDteFechaIngreso = new com.toedter.calendar.JDateChooser();
         btnValidar = new javax.swing.JButton();
+        txtProveedor = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 51));
@@ -154,7 +156,7 @@ public class Editar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Producto", "Cantidad", "Fecha de ingreso", "Fehca de caducidad", "Ubicación"
+                "ID", "Producto", "Cantidad", "Fecha de ingreso", "Fehca de caducidad", "Ubicación", "Proveedor ID"
             }
         ));
         jScrollPane2.setViewportView(tblEditar);
@@ -241,6 +243,10 @@ public class Editar extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Proveedor ID :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -299,8 +305,15 @@ public class Editar extends javax.swing.JFrame {
                                     .addComponent(boxAlm4))))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jButton1)
-                            .addGap(8, 8, 8))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton1)
+                                    .addGap(8, 8, 8))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(20, 20, 20)
+                                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(94, 94, 94))))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -310,7 +323,7 @@ public class Editar extends javax.swing.JFrame {
                 .addComponent(lblAdminAutorizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlblID, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -329,11 +342,15 @@ public class Editar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblValidar))))
                     .addComponent(jLabel7))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtDteFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(boxAlm4)
@@ -403,6 +420,7 @@ public class Editar extends javax.swing.JFrame {
 
             data.setUbicacion(almacen);
             data.setIdStock(seleccionFila);
+            data.setIdProveedor(txtProducto.getText());
 
             dao.datosEditar(data);
             dato = false;
@@ -411,6 +429,7 @@ public class Editar extends javax.swing.JFrame {
             ahoraH ="ID: " +jlblID.getText()+ "\n " +
                     "Producto: " +txtProducto.getText()+ "\n " +
                     "Cantidad: " +txtCantidad.getText()+ "\n " +
+                    "Proveedor: " +txtProveedor.getText()+"\n " +
                     "Almacen: " +almacen+"\n " +
                     "Entrega: " +strFechaEntrega ;
             dataH.setIdStock(seleccionFila);
@@ -435,6 +454,7 @@ public class Editar extends javax.swing.JFrame {
             txtCantidad.setText(model.getValueAt(tblEditar.getSelectedRow(), 2).toString());
             String fecha = model.getValueAt(tblEditar.getSelectedRow(), 3).toString();
             String tipoAlmacen = (String) tblEditar.getValueAt(tblEditar.getSelectedRow(), 5);
+            txtProveedor.setText((String) tblEditar.getValueAt(tblEditar.getSelectedRow(), 6));
             if ("ALMACEN 1".equals(tipoAlmacen)) {
                 boxAlm1.setSelected(true);
             } else if ("ALMACEN 2".equals(tipoAlmacen)) {
@@ -458,6 +478,7 @@ public class Editar extends javax.swing.JFrame {
             antesH ="ID: "+ jlblID.getText()+ "\n " +
                     "Producto: "+ txtProducto.getText()+ "\n " +
                     "Cantidad: "+ txtCantidad.getText()+ "\n " +
+                    "Proveedor: " +txtProveedor.getText()+"\n " +
                     "Almacen: " +tipoAlmacen+"\n " +
                     "Entrega: "+ fecha;
             btnValidar.setEnabled(true);
@@ -558,13 +579,14 @@ public class Editar extends javax.swing.JFrame {
         lista = dao.datosSelect();
         model.setRowCount(0);
         for (Datos dat : lista) {
-            Object[] objeto = new Object[6];
+            Object[] objeto = new Object[7];
             objeto[0] = dat.getIdStock();
             objeto[1] = dat.getCodProducto();
             objeto[2] = dat.getCantidad();
             objeto[3] = dat.getFechaIngreso();
             objeto[4] = dat.getFechaCaducidad();
             objeto[5] = dat.getUbicacion();
+            objeto[6] = dat.getIdProveedor();
             model.addRow(objeto);
         }
 
@@ -600,6 +622,7 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jlblID;
@@ -609,5 +632,6 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidad;
     private com.toedter.calendar.JDateChooser txtDteFechaIngreso;
     private javax.swing.JTextField txtProducto;
+    private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
 }

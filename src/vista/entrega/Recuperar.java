@@ -30,7 +30,6 @@ public class Recuperar extends javax.swing.JFrame {
     
     private DaoHistorial daoH;
     private Historial dataH;
-    DateTimeFormatter formato;
     DateTimeFormatter formato2;
     
 
@@ -233,13 +232,15 @@ public class Recuperar extends javax.swing.JFrame {
         lista = dao.datosSelectEliminados();
         model.setRowCount(0);
         for (Datos dat : lista) {
-            Object[] objeto = new Object[6];
+            Object[] objeto = new Object[7];
             objeto[0] = dat.getIdStock();
             objeto[1] = dat.getCodProducto();
             objeto[2] = dat.getCantidad();
             objeto[3] = dat.getFechaIngreso();
             objeto[4] = dat.getFechaCaducidad();
             objeto[5] = dat.getUbicacion();
+            objeto[6] = dat.getIdProveedor();
+            
             model.addRow(objeto);
         }
 

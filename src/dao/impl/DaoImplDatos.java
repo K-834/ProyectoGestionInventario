@@ -7,7 +7,6 @@ package dao.impl;
 import dao.DaoDatos;
 import entidades.Datos;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -42,7 +41,8 @@ public class DaoImplDatos implements DaoDatos {
                 .append("cantidad, ")
                 .append("fechaEntrada, ")
                 .append("fechaCaducidad, ")
-                .append("ubicacion ")
+                .append("ubicacion, ")
+                .append("idProveedor ")
                 .append("FROM inventario ")
                 .append("WHERE estado = 1");
         try (Connection cn = conexion.getConexion()) {
@@ -57,6 +57,7 @@ public class DaoImplDatos implements DaoDatos {
                 data.setFechaIngreso(rs.getString(4));
                 data.setFechaCaducidad(rs.getString(5));
                 data.setUbicacion(rs.getString(6));
+                data.setIdProveedor(rs.getString(7));
                 lista.add(data);
             }
         } catch (Exception e) {
@@ -73,7 +74,8 @@ public class DaoImplDatos implements DaoDatos {
                 .append("cantidad = ?, ")
                 .append("fechaEntrada = ?, ")
                 .append("fechaCaducidad = ?, ")
-                .append("ubicacion = ? ")
+                .append("ubicacion = ?, ")
+                .append("idProveedor = ? ")
                 .append("WHERE idStock = ?");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
@@ -82,7 +84,8 @@ public class DaoImplDatos implements DaoDatos {
             ps.setString(3, data.getFechaIngreso());
             ps.setString(4, data.getFechaCaducidad());
             ps.setString(5, data.getUbicacion());
-            ps.setInt(6, data.getIdStock());
+            ps.setString(6, data.getIdProveedor());
+            ps.setInt(7, data.getIdStock());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
                 mensaje = "Cero registros actualizados";
@@ -103,8 +106,9 @@ public class DaoImplDatos implements DaoDatos {
                 .append("fechaEntrada, ")
                 .append("fechaCaducidad, ")
                 .append("ubicacion, ")
+                .append("idProveedor, ")
                 .append("estado")
-                .append(") VALUES (?,?,?,?,?,1)");
+                .append(") VALUES (?,?,?,?,?,?,1)");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ps.setString(1, data.getCodProducto());
@@ -112,6 +116,7 @@ public class DaoImplDatos implements DaoDatos {
             ps.setString(3, data.getFechaIngreso());
             ps.setString(4, data.getFechaCaducidad());
             ps.setString(5, data.getUbicacion());
+            ps.setString(6, data.getIdProveedor());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
                 mensaje = "Cero registros agregados";
@@ -172,7 +177,8 @@ public class DaoImplDatos implements DaoDatos {
                 .append("cantidad, ")
                 .append("fechaEntrada, ")
                 .append("fechaCaducidad, ")
-                .append("ubicacion ")
+                .append("ubicacion, ")
+                .append("idProveedor ")
                 .append("FROM inventario ")
                 .append("WHERE estado = 0");
         try (Connection cn = conexion.getConexion()) {
@@ -187,6 +193,7 @@ public class DaoImplDatos implements DaoDatos {
                 data.setFechaIngreso(rs.getString(4));
                 data.setFechaCaducidad(rs.getString(5));
                 data.setUbicacion(rs.getString(6));
+                data.setIdProveedor(rs.getString(7));
                 lista.add(data);
             }
         } catch (Exception e) {
