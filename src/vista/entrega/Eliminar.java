@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import util.Memoria;
+import vista.Menu;
 
 /**
  *
@@ -230,13 +231,13 @@ public class Eliminar extends javax.swing.JFrame {
 
         titulo6.setBackground(new java.awt.Color(0, 0, 0));
         titulo6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        titulo6.setText("ID Proveedor");
+        titulo6.setText("Ubicacion");
         titulo6.setAlignmentX(2.0F);
         titulo6.setAlignmentY(2.0F);
         titulo6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
 
         lblProveedor.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        lblProveedor.setText("ID Proveedor");
+        lblProveedor.setText("Ubicacion");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -440,7 +441,7 @@ public class Eliminar extends javax.swing.JFrame {
             lblProducto.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 1).toString());
             lblCantidad.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 2).toString());
             lblFecha.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 3).toString());
-            lblProveedor.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 6).toString());
+            lblProveedor.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 5).toString());
             
             seleccion = true;
             jlblSelecciontxt.setText("Se ha seleccionado una fila");
@@ -460,7 +461,7 @@ public class Eliminar extends javax.swing.JFrame {
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
-        //   vistaMenu();
+           Menu.main(null);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
@@ -474,6 +475,7 @@ public class Eliminar extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //   vistaAñadir();
+        Añadir.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
