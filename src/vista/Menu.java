@@ -90,7 +90,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jLabel2)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +188,7 @@ public class Menu extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
         jButton6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Problema");
+        jButton6.setText("Reporte");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -205,9 +205,9 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jButton3)
-                        .addGap(191, 191, 191)
+                        .addGap(203, 203, 203)
                         .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(101, 101, 101))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -334,7 +334,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        ReporteEmpleado.main(null);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed

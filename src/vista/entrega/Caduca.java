@@ -4,6 +4,7 @@
  */
 package vista.entrega;
 
+import vista.reportes.ViewReporte;
 import dao.DaoDatos;
 import dao.impl.DaoImplDatos;
 import entidades.Datos;
@@ -196,7 +197,7 @@ public class Caduca extends javax.swing.JFrame {
 
     private void btnDatosGenerales1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosGenerales1ActionPerformed
 
-        CaducaGeneral cadGeneral = new CaducaGeneral();
+        ViewReporte cadGeneral = new ViewReporte();
         cadGeneral.setVisible(true);
         cadGeneral.setLocationRelativeTo(null);
         this.dispose();
