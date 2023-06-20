@@ -14,6 +14,7 @@ import util.Memoria;
  * @author LENOVO
  */
 public class Menu extends javax.swing.JFrame {
+
     /**
      * Creates new form menu
      */
@@ -23,10 +24,16 @@ public class Menu extends javax.swing.JFrame {
         String nivel = String.valueOf(Memoria.get("nivel"));
         if ("2".equals(nivel)) {
             lblNivel.setText("Administrador");
-        }else{
-        lblNivel.setText("");
+        } else {
+            lblNivel.setText("");
         }
-        
+
+        if (Memoria.get("nivel").toString() == "2") {
+            btnVolverMenuAD.setVisible(true);
+        } else {
+
+            btnVolverMenuAD.setVisible(false);
+        }
     }
 
     /**
@@ -43,6 +50,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnVolverMenuAD = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -74,6 +82,16 @@ public class Menu extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Restaurante central");
 
+        btnVolverMenuAD.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolverMenuAD.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnVolverMenuAD.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolverMenuAD.setText("VOLVER");
+        btnVolverMenuAD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuADActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,7 +104,11 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(btnVolverMenuAD))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jLabel2)))
@@ -95,13 +117,15 @@ public class Menu extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel6)
-                .addGap(108, 108, 108))
+                .addGap(29, 29, 29)
+                .addComponent(btnVolverMenuAD)
+                .addGap(54, 54, 54))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -318,7 +342,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginAdmin.main(null);
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -343,6 +367,14 @@ public class Menu extends javax.swing.JFrame {
         Perfil.main(null);
         this.dispose();
     }//GEN-LAST:event_btnPerfilActionPerformed
+
+    private void btnVolverMenuADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuADActionPerformed
+        // TODO add your handling code here:
+
+       Menu_administrador.main(null);
+            this.dispose();
+
+    }//GEN-LAST:event_btnVolverMenuADActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,9 +415,9 @@ public class Menu extends javax.swing.JFrame {
     }
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPerfil;
+    private javax.swing.JButton btnVolverMenuAD;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

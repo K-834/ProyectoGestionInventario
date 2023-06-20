@@ -209,8 +209,9 @@ public class ReporteEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if (Memoria.get("codigoEmpleado")== "2") {
+        if (Memoria.get("nivel")== "2") {
             Menu_administrador.main(null);
+            System.out.println("menu-admin");
         this.dispose();
         } else {
             Menu.main(null);

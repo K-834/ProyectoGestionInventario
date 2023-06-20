@@ -127,7 +127,7 @@ public class Eliminar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Producto", "Cantidad", "Fecha Ingreso", "Fecha Caducidad", "Ubicación", "Proveedor ID"
+                "Id", "Producto", "Cantidad", "Fecha Ingreso", "Fecha Caducidad", "Ubicación"
             }
         ));
         tblDatosEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
