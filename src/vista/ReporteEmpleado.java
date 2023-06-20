@@ -199,7 +199,7 @@ public class ReporteEmpleado extends javax.swing.JFrame {
 
             dataH.setIdStock(0);
             dataH.setIdUsuario(usuario);
-            dataH.setHistorial("Reporte");
+            dataH.setHistorial("REPORTE");
             dataH.setFechaCambio(LocalDateTime.now().format(formato2));
             dataH.setDescripcion("Tipo: " + tipoR + "\n Titulo: " + tituloR+ "\n Reporte: " + reporte);
             daoH.userInsertar(dataH);
@@ -209,8 +209,13 @@ public class ReporteEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Menu.main(null);
+        if (Memoria.get("codigoEmpleado")== "2") {
+            Menu_administrador.main(null);
         this.dispose();
+        } else {
+            Menu.main(null);
+        this.dispose();
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtTituloReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloReporteActionPerformed

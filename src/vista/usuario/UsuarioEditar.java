@@ -144,6 +144,9 @@ public class UsuarioEditar extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tblEditar);
+        if (tblEditar.getColumnModel().getColumnCount() > 0) {
+            tblEditar.getColumnModel().getColumn(5).setHeaderValue("Contraseña");
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

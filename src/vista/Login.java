@@ -247,7 +247,7 @@ public class Login extends javax.swing.JFrame {
                 Memoria.put("codigoEmpleado", adm.getCodigo());
                 dataH.setIdStock(0);
                 dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
-                dataH.setHistorial("Logeado");
+                dataH.setHistorial("LOGEADO");
                 dataH.setFechaCambio(LocalDateTime.now().format(formato2));
                 dataH.setDescripcion("");
                 daoH.userInsertar(dataH);

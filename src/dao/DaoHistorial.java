@@ -18,5 +18,7 @@ public interface DaoHistorial {
     String userInsertar(Historial histo);
 
     String getMensaje();
+    
+    Historial userGrafico(String Usuario);
 
 }

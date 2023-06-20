@@ -17,7 +17,7 @@ import util.Conexion;
  *
  * @author antho
  */
-public class DaoImplHistorial implements DaoHistorial{
+public class DaoImplHistorial implements DaoHistorial {
 
     private final Conexion conexion;
     private String mensaje;
@@ -30,10 +30,10 @@ public class DaoImplHistorial implements DaoHistorial{
     public String getMensaje() {
         return mensaje;
     }
-    
+
     @Override
     public List<Historial> userSelect() {
-         List<Historial> lista = null;
+        List<Historial> lista = null;
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
                 .append("idStock, ")
@@ -62,12 +62,12 @@ public class DaoImplHistorial implements DaoHistorial{
             mensaje = e.getMessage();
         }
         return lista;
-    
+
     }
 
     @Override
     public String userInsertar(Historial histo) {
-          StringBuilder sql = new StringBuilder();
+        StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO detalles(")
                 .append("idStock, ")
                 .append("idUsuario, ")
@@ -91,7 +91,42 @@ public class DaoImplHistorial implements DaoHistorial{
             System.out.println(mensaje);
         }
         return mensaje;
-    
+
     }
-    
+
+    @Override
+    public Historial userGrafico(String usuario) {
+        Historial userG = null;
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT ")
+                .append("COUNT(CASE WHEN historial = 'ELIMINADO' THEN historial END) AS Eliminar, ")
+                .append("COUNT(CASE WHEN historial = 'RECUPERADO' THEN historial END) AS Recuperado, ")
+                .append("COUNT(CASE WHEN historial = 'EDITADO' THEN historial END) AS Editado, ")
+                .append("COUNT(CASE WHEN historial = 'AÑADIR' THEN historial END) AS Añadir, ")
+                .append("COUNT(CASE WHEN historial = 'LOGEADO' THEN historial END) AS Logear, ")
+                .append("COUNT(CASE WHEN historial = 'REPORTE' THEN historial END) AS Reporte ")
+                .append("FROM detalles ")
+                .append("WHERE idUsuario = ? ");
+        try (Connection cn = conexion.getConexion()) {
+            PreparedStatement ps = cn.prepareStatement(sql.toString());
+            ps.setString(1, usuario);
+            ResultSet resultado = ps.executeQuery();
+            userG = new Historial();
+            if (resultado.next()) {
+                userG.setHistorialELiminar(resultado.getString(1));
+                userG.setHistorialRecuperado(resultado.getString(2));
+                userG.setHistorialEditado(resultado.getString(3));
+                userG.setHistorialAñadir(resultado.getString(4));
+                userG.setHistorialLogeado(resultado.getString(5));
+                userG.setHistorialReporte(resultado.getString(6));
+                System.out.println(userG.getHistorialELiminar());    
+                System.out.println(userG.getHistorialReporte());    
+            }
+        } catch (Exception e) {
+            mensaje = e.getMessage();
+        }
+        return userG;
+
+    }
+
 }
