@@ -216,8 +216,13 @@ public class Perfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        Menu.main(null);
+       if (Memoria.get("codigoEmpleado")== "2") {
+            Menu_administrador.main(null);
         this.dispose();
+        } else {
+            Menu.main(null);
+        this.dispose();
+        }
     }//GEN-LAST:event_btnMenuActionPerformed
 
     /**

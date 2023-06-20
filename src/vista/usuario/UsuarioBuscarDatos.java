@@ -5,31 +5,41 @@
 package vista.usuario;
 
 import dao.DaoDatos;
+import dao.DaoHistorial;
 import dao.DaoUsuario;
-import dao.impl.DaoImplDatos;
+import dao.impl.DaoImplHistorial;
 import dao.impl.DaoImplUsuario;
-import entidades.Datos;
+import entidades.Historial;
 import entidades.Usuario;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import vista.Menu_administrador;
 
 /**
  *
  * @author acer
  */
-public class UsuarioBuscar extends javax.swing.JFrame {
-     private DaoUsuario dao;
+public class UsuarioBuscarDatos extends javax.swing.JFrame {
+
+    private DaoUsuario dao;
     private List<Usuario> lista;
     private DefaultTableModel model;
     private Usuario data;
     TableRowSorter<DefaultTableModel> obj;
+
     /**
      * Creates new form UsuarioBuscar
      */
-    public UsuarioBuscar() {
+    public UsuarioBuscarDatos() {
         initComponents();
         model = (DefaultTableModel) tblBuscar.getModel();
         obj = new TableRowSorter<>(model);
@@ -56,6 +66,12 @@ public class UsuarioBuscar extends javax.swing.JFrame {
         Id = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuscar = new javax.swing.JTable();
+        btnVerDatos = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtCodEmpleado = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        btnSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,10 +113,45 @@ public class UsuarioBuscar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Codigo del Us", "Nombre", "Apellido", "Correo", "Telefono", "Contraseña"
+                "Codigo Usuario", "Nombre", "Apellido", "Correo", "Telefono"
             }
         ));
         jScrollPane1.setViewportView(tblBuscar);
+
+        btnVerDatos.setText("Ver Datos");
+        btnVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDatosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("<- Selecciona los datos en tabla o digita");
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("ID Empleado:");
+
+        btnSeleccionar.setText("Selección");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,16 +161,32 @@ public class UsuarioBuscar extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(btnVerDatos)
+                                .addGap(36, 36, 36)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(133, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCodEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSeleccionar))
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnVolver)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addGap(259, 259, 259)))
                         .addGap(26, 26, 26))))
@@ -137,9 +204,19 @@ public class UsuarioBuscar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerDatos))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -172,6 +249,47 @@ public class UsuarioBuscar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_IdKeyPressed
 
+    private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
+        // TODO add your handling code here:
+        String empleado = txtCodEmpleado.getText();
+        DaoHistorial daoH = new DaoImplHistorial();
+        try {
+            Historial userH = daoH.userGrafico(empleado);
+        int n1 = Integer.parseInt(userH.getHistorialAñadir());
+        int n2 = Integer.parseInt(userH.getHistorialELiminar());
+        int n3 = Integer.parseInt(userH.getHistorialEditado());
+        int n4 = Integer.parseInt(userH.getHistorialLogeado());
+        int n5 = Integer.parseInt(userH.getHistorialRecuperado());
+        int n6 = Integer.parseInt(userH.getHistorialReporte());
+        DefaultCategoryDataset tablaDatos = new DefaultCategoryDataset();
+        tablaDatos.setValue(n1, "Eliminar", empleado);
+        tablaDatos.setValue(n2, "Añadir", empleado);
+        tablaDatos.setValue(n3, "Editar", empleado);
+        tablaDatos.setValue(n4, "Logeado", empleado);
+        tablaDatos.setValue(n5, "Recuperado", empleado);
+        tablaDatos.setValue(n6, "Reporte", empleado);
+        
+        JFreeChart grafico = ChartFactory.createBarChart3D("Cambios de Usuario", "Empleado", "Cantidad", tablaDatos,PlotOrientation.VERTICAL,true,true,false);
+        ChartPanel panel = new ChartPanel(grafico);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(500,200));
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(panel,BorderLayout.NORTH);
+        
+        pack();
+        repaint();
+        } catch (Exception e) {
+            System.out.println(daoH.getMensaje());;
+        }
+        
+    }//GEN-LAST:event_btnVerDatosActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+        txtCodEmpleado.setText(tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0).toString());
+     
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,26 +307,36 @@ public class UsuarioBuscar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioBuscarDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsuarioBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioBuscarDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsuarioBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioBuscarDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsuarioBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioBuscarDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioBuscar().setVisible(true);
+                UsuarioBuscarDatos ubd = new UsuarioBuscarDatos();
+                ubd.setVisible(true);
+                ubd.setLocationRelativeTo(null);
+                
             }
         });
     }
+
     private void datosSelect() {
-       lista = dao.UsuarioSelect();
+        lista = dao.UsuarioSelect();
         model.setRowCount(0);
         for (Usuario dat : lista) {
             Object[] objeto = new Object[6];
@@ -224,11 +352,17 @@ public class UsuarioBuscar extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Id;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JButton btnVerDatos;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuscar;
+    private javax.swing.JTextField txtCodEmpleado;
     // End of variables declaration//GEN-END:variables
 }
