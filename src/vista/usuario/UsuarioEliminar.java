@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vista.Menu_admin_empleado;
 import vista.Menu_administrador;
 
 /**
@@ -665,7 +666,7 @@ public class UsuarioEliminar extends javax.swing.JFrame {
 
     private void btnMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu3ActionPerformed
         // TODO add your handling code here:
-        Menu_administrador.main(null);
+        Menu_admin_empleado.main(null);
         this.dispose();
     }//GEN-LAST:event_btnMenu3ActionPerformed
 
