@@ -17,22 +17,22 @@ public class Datos {
     private String fechaIngreso;
     private String fechaCaducidad;
     private String Ubicacion;
+    private String idProveedor;
     private int estado;
 
     public Datos() {
     }
 
-    public Datos(int idStock, String codProducto, int cantidad, String fechaIngreso, String fechaCaducidad, String Ubicacion, int estado) {
+    public Datos(int idStock, String codProducto, int cantidad, String fechaIngreso, String fechaCaducidad, String Ubicacion, String idProveedor, int estado) {
         this.idStock = idStock;
         this.codProducto = codProducto;
         this.cantidad = cantidad;
         this.fechaIngreso = fechaIngreso;
         this.fechaCaducidad = fechaCaducidad;
         this.Ubicacion = Ubicacion;
+        this.idProveedor = idProveedor;
         this.estado = estado;
     }
-
-   
     
 
     public int getIdStock() {
@@ -89,6 +89,14 @@ public class Datos {
 
     public void setFechaCaducidad(String fechaCaducidad) {
         this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public String getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(String idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     

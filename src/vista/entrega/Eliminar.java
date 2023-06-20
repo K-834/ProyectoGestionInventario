@@ -63,6 +63,8 @@ public class Eliminar extends javax.swing.JFrame {
 
         jToggleButton3 = new javax.swing.JToggleButton();
         jTextField1 = new javax.swing.JTextField();
+        titulo5 = new javax.swing.JLabel();
+        lblFecha1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -83,11 +85,23 @@ public class Eliminar extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jlblSelecciontxt = new javax.swing.JLabel();
+        titulo6 = new javax.swing.JLabel();
+        lblProveedor = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
 
         jToggleButton3.setText("jToggleButton1");
 
         jTextField1.setText("jTextField1");
+
+        titulo5.setBackground(new java.awt.Color(0, 0, 0));
+        titulo5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        titulo5.setText("   Fecha Ingreso");
+        titulo5.setAlignmentX(2.0F);
+        titulo5.setAlignmentY(2.0F);
+        titulo5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
+
+        lblFecha1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lblFecha1.setText("Fecha de Ingreso");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,7 +127,7 @@ public class Eliminar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Producto", "Cantidad", "Fecha Ingreso", "Fecha Caducidad", "Ubicación"
+                "Id", "Producto", "Cantidad", "Fecha Ingreso", "Fecha Caducidad", "Ubicación", "Proveedor ID"
             }
         ));
         tblDatosEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,6 +228,16 @@ public class Eliminar extends javax.swing.JFrame {
         jlblSelecciontxt.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jlblSelecciontxt.setText("Seleccionar una Fila");
 
+        titulo6.setBackground(new java.awt.Color(0, 0, 0));
+        titulo6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        titulo6.setText("ID Proveedor");
+        titulo6.setAlignmentX(2.0F);
+        titulo6.setAlignmentY(2.0F);
+        titulo6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
+
+        lblProveedor.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lblProveedor.setText("ID Proveedor");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -229,30 +253,37 @@ public class Eliminar extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblProducto)
+                                .addGap(19, 19, 19)))
                         .addGap(34, 34, 34)
-                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblProducto)
-                        .addGap(19, 19, 19)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCantidad)
-                    .addComponent(titulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFecha)
-                    .addComponent(titulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCantidad)
+                            .addComponent(titulo3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFecha)
+                            .addComponent(titulo4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titulo6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblProveedor)
+                                .addGap(24, 24, 24))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,23 +291,29 @@ public class Eliminar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(titulo1)
-                    .addComponent(titulo2)
-                    .addComponent(titulo3)
-                    .addComponent(titulo4))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblID)
-                    .addComponent(lblProducto)
-                    .addComponent(lblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFecha))
-                .addGap(57, 57, 57)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnEliminar)
-                    .addComponent(jlblSelecciontxt))
-                .addGap(17, 17, 17))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(titulo1)
+                            .addComponent(titulo2)
+                            .addComponent(titulo3)
+                            .addComponent(titulo4))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblID)
+                            .addComponent(lblProducto)
+                            .addComponent(lblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFecha)
+                            .addComponent(lblProveedor))
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(btnEliminar)
+                            .addComponent(jlblSelecciontxt))
+                        .addGap(17, 17, 17))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(titulo6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         btnActualizar.setBackground(new java.awt.Color(0, 0, 0));
@@ -294,26 +331,25 @@ public class Eliminar extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(btnMenu)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRecuperar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(43, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(43, 43, 43))
+                .addGap(39, 39, 39)
+                .addComponent(btnMenu)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRecuperar)
+                .addGap(46, 46, 46))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(265, 265, 265))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,6 +440,8 @@ public class Eliminar extends javax.swing.JFrame {
             lblProducto.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 1).toString());
             lblCantidad.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 2).toString());
             lblFecha.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 3).toString());
+            lblProveedor.setText(model.getValueAt(tblDatosEliminar.getSelectedRow(), 6).toString());
+            
             seleccion = true;
             jlblSelecciontxt.setText("Se ha seleccionado una fila");
             jlblSelecciontxt.setForeground(Color.BLACK);
@@ -487,13 +525,14 @@ public class Eliminar extends javax.swing.JFrame {
         lista = dao.datosSelect();
         model.setRowCount(0);
         for (Datos dat : lista) {
-            Object[] objeto = new Object[6];
+            Object[] objeto = new Object[7];
             objeto[0] = dat.getIdStock();
             objeto[1] = dat.getCodProducto();
             objeto[2] = dat.getCantidad();
             objeto[3] = dat.getFechaIngreso();
             objeto[4] = dat.getFechaCaducidad();
             objeto[5] = dat.getUbicacion();
+            objeto[6] = dat.getIdProveedor();
             model.addRow(objeto);
         }
 
@@ -517,12 +556,16 @@ public class Eliminar extends javax.swing.JFrame {
     private javax.swing.JLabel jlblSelecciontxt;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblFecha1;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblProducto;
+    private javax.swing.JLabel lblProveedor;
     private javax.swing.JTable tblDatosEliminar;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel titulo2;
     private javax.swing.JLabel titulo3;
     private javax.swing.JLabel titulo4;
+    private javax.swing.JLabel titulo5;
+    private javax.swing.JLabel titulo6;
     // End of variables declaration//GEN-END:variables
 }

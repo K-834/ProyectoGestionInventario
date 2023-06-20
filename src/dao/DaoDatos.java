@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entidades.Producto;
+
 import entidades.Datos;
 import java.util.List;
 

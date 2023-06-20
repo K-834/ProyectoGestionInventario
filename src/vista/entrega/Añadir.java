@@ -99,6 +99,8 @@ public class Añadir extends javax.swing.JFrame {
         boxAlm1 = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         lblValidar = new javax.swing.JLabel();
+        txtProveedorCodigo = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,7 +139,7 @@ public class Añadir extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Producto", "Cantidad", "Fecha ingreso", "Fecha Caducidad", "Ubicacion"
+                "ID", "Producto", "Cantidad", "Fecha ingreso", "Fecha Caducidad", "Ubicacion", "Proveedor"
             }
         ));
         jScrollPane1.setViewportView(tblAñadir);
@@ -226,6 +228,10 @@ public class Añadir extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Codigo Proveedor               :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -250,26 +256,33 @@ public class Añadir extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(260, 260, 260))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(56, 56, 56)
+                                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(59, 59, 59)
+                                    .addComponent(boxAlm1)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(boxAlm2)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(boxAlm3)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(boxAlm4)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(jLabel6)
                                 .addGap(56, 56, 56)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(59, 59, 59)
-                                .addComponent(boxAlm1)
-                                .addGap(28, 28, 28)
-                                .addComponent(boxAlm2)
-                                .addGap(30, 30, 30)
-                                .addComponent(boxAlm3)
-                                .addGap(28, 28, 28)
-                                .addComponent(boxAlm4)))
+                                .addComponent(txtProveedorCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel2)
                         .addGap(57, 57, 57)
                         .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +315,13 @@ public class Añadir extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(boxAlm2)
                         .addComponent(boxAlm1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(txtProveedorCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(btnIngresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,11 +503,13 @@ public class Añadir extends javax.swing.JFrame {
         data.setFechaIngreso(strFechaEntrega);
         data.setFechaCaducidad(strFechaCaducidad);
         data.setUbicacion(almacen);
+        data.setIdProveedor(txtProveedorCodigo.getText());
         dao.datosInsertar(data);
         
          String ahoraH = "Producto: " +txtProducto.getText()+ "\n " +
                     "Cantidad: " +txtCantidad.getText()+ "\n " +
                     "Almacen: " +almacen+"\n " +
+                    "Proveedor: " +txtProveedorCodigo.getText()+"\n " +
                     "Entrega: " +strFechaEntrega ;
         
         
@@ -520,13 +541,14 @@ public class Añadir extends javax.swing.JFrame {
         lista = dao.datosSelect();
         model.setRowCount(0);
         for (Datos dat : lista) {
-            Object[] objeto = new Object[6];
+            Object[] objeto = new Object[7];
             objeto[0] = dat.getIdStock();
             objeto[1] = dat.getCodProducto();
             objeto[2] = dat.getCantidad();
             objeto[3] = dat.getFechaIngreso();
             objeto[4] = dat.getFechaCaducidad();
             objeto[5] = dat.getUbicacion();
+            objeto[6] = dat.getIdProveedor();
             model.addRow(objeto);
 
         }
@@ -545,6 +567,7 @@ public class Añadir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -552,5 +575,6 @@ public class Añadir extends javax.swing.JFrame {
     private javax.swing.JTable tblAñadir;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtProducto;
+    private javax.swing.JTextField txtProveedorCodigo;
     // End of variables declaration//GEN-END:variables
 }
