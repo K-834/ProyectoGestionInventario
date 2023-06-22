@@ -6,6 +6,7 @@ package vista;
 
 import vista.reportes.ViewReporte;
 import vista.usuario.UsuarioBuscarDatos;
+import vista.producto.ProductoMenu;
 /**
  *
  * @author LENOVO
@@ -256,6 +257,8 @@ public class Menu_administrador extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+         ProductoMenu.main(null);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnVolverMenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuPActionPerformed
