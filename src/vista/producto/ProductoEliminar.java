@@ -55,6 +55,7 @@ public class ProductoEliminar extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("Eliminar Proveedores");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
