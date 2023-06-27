@@ -14,25 +14,21 @@ public class Proveedores {
    private String email;
    private String notas;
    private String idProvee;
-   private String numIde;
-   private  int ruc;
-   private int celular;
+   private String tipoDoc;
+   private int numDoc;
    private int estadoP;
 
-    public Proveedores(){
-        
+    public Proveedores() {
     }
-    
-    
-    public Proveedores(String nombre, String direccion, String email, String notas, String idProvee, String numIde, int ruc, int celular, int estadoP) {
+
+    public Proveedores(String nombre, String direccion, String email, String notas, String idProvee, String tipoDoc, int numDoc, int estadoP) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
         this.notas = notas;
         this.idProvee = idProvee;
-        this.numIde = numIde;
-        this.ruc = ruc;
-        this.celular = celular;
+        this.tipoDoc = tipoDoc;
+        this.numDoc = numDoc;
         this.estadoP = estadoP;
     }
 
@@ -76,30 +72,22 @@ public class Proveedores {
         this.idProvee = idProvee;
     }
 
-    public String getNumIde() {
-        return numIde;
+    public String getTipoDoc() {
+        return tipoDoc;
     }
 
-    public void setNumIde(String numIde) {
-        this.numIde = numIde;
+    public void setTipoDoc(String tipoDoc) {
+        this.tipoDoc = tipoDoc;
     }
 
-    public int getRuc() {
-        return ruc;
+    public int getNumDoc() {
+        return numDoc;
     }
 
-    public void setRuc(int ruc) {
-        this.ruc = ruc;
+    public void setNumDoc(int numDoc) {
+        this.numDoc = numDoc;
     }
 
-    public int getCelular() {
-        return celular;
-    }
-
-    public void setCelular(int celular) {
-        this.celular = celular;
-    }
-   
     public int getEstadoP() {
         return estadoP;
     }
@@ -107,7 +95,8 @@ public class Proveedores {
     public void setEstadoP(int estadoP) {
         this.estadoP = estadoP;
     }
-    
+
+   
     
     
 }
