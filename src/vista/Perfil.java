@@ -4,6 +4,7 @@
  */
 package vista;
 
+import vista.usuario.UsuarioMenu;
 import dao.DaoUsuario;
 import dao.impl.DaoImplUsuario;
 import entidades.Usuario;
@@ -220,7 +221,7 @@ public class Perfil extends javax.swing.JFrame {
             Menu.main(null);
         this.dispose();
         } else {
-        Menu_admin_empleado.main(null);
+        UsuarioMenu.main(null);
         this.dispose();
         }
     }//GEN-LAST:event_btnMenuActionPerformed
