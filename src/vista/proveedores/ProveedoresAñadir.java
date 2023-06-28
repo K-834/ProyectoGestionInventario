@@ -313,16 +313,20 @@ public class ProveedoresAñadir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAñadirActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //vistaMenu();
-       // this.dispose();
+       ProveedorMenu.main(null);
+       this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ProveedoresEditar.main(null);
+        this.dispose();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        ProveedoresEliminar.main(null);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jcboxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboxTipoActionPerformed

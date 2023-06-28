@@ -51,7 +51,7 @@ public class DaoImplHistorial implements DaoHistorial {
             lista = new ArrayList<>();
             while (rs.next()) {
                 Historial histo = new Historial();
-                histo.setIdCambio(rs.getInt(1));
+                 histo.setIdCambio(rs.getInt(1));
                 histo.setIdStock(rs.getInt(2));
                 histo.setIdUsuario(rs.getString(3));
                 histo.setHistorial(rs.getString(4));

@@ -2,25 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista.producto;
+package vista.proveedores;
 
+import vista.producto.*;
 import vista.*;
 import javax.swing.JOptionPane;
-import vista.entrega.Caduca;
-import vista.entrega.Eliminar;
-import vista.entrega.Añadir;
 import util.Memoria;
 
 /**
  *
  * @author LENOVO
  */
-public class ProductoMenu extends javax.swing.JFrame {
+public class ProveedorMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form menu
      */
-    public ProductoMenu() {
+    public ProveedorMenu() {
         initComponents();
         lblNombre.setText(String.valueOf(Memoria.get("nomb")));
         String nivel = String.valueOf(Memoria.get("nivel"));
@@ -300,20 +298,20 @@ public class ProductoMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ProductoAñadir.main(null);
+        ProveedoresAñadir.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ProductoEditar.main(null);
+        ProveedoresEditar.main(null);
         this.dispose();
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        ProductoEliminar.main(null);
+        ProveedoresEliminar.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -358,19 +356,14 @@ public class ProductoMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductoMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -378,7 +371,7 @@ public class ProductoMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ProductoMenu menu = new ProductoMenu();
+                ProveedorMenu menu = new ProveedorMenu();
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);
             }

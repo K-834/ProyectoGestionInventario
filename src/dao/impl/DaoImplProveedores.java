@@ -17,15 +17,14 @@ import util.Conexion;
  *
  * @author Anghello
  */
-public class DaoImplProveedores implements DaoProveedores{
-    
+public class DaoImplProveedores implements DaoProveedores {
+
     private final Conexion conexion;
     private String mensaje;
 
     public DaoImplProveedores() {
         this.conexion = new Conexion();
     }
-    
 
     @Override
     public String getMensaje() {
@@ -34,19 +33,19 @@ public class DaoImplProveedores implements DaoProveedores{
 
     @Override
     public List<Proveedores> proveedoresSelect() {
-       List<Proveedores> lista = null;
-       StringBuilder sql = new StringBuilder();
-       sql.append("SELECT ")
-               .append("idProvee, ")
-               .append("nombre, ")
-               .append("direccion, ")
-               .append("email, ")
-               .append("notas, ")
-               .append("tipoDoc, ")
-               .append("NumDoc ")
-               .append("FROM proveedores ")
-               .append("WHERE estadoP = 1");
-       try (Connection cn = conexion.getConexion()) {
+        List<Proveedores> lista = null;
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT ")
+                .append("idProvee, ")
+                .append("nombre, ")
+                .append("direccion, ")
+                .append("email, ")
+                .append("notas, ")
+                .append("tipoDoc, ")
+                .append("NumDoc ")
+                .append("FROM proveedores ")
+                .append("WHERE estado = 1");
+        try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ResultSet rs = ps.executeQuery();
             lista = new ArrayList<>();
@@ -61,23 +60,23 @@ public class DaoImplProveedores implements DaoProveedores{
                 provee.setNumDoc(rs.getInt(7));
                 lista.add(provee);
             }
-            } catch (Exception e) {
+        } catch (Exception e) {
             mensaje = e.getMessage();
         }
-       return lista;
-       }
+        return lista;
+    }
 
     @Override
     public String proveedoresEditar(Proveedores provee) {
-       StringBuilder sql = new StringBuilder();
-       sql.append("UPDATE proveedores SET ")
-               .append("nombre = ?, ")
-               .append("direccion = ?, ")
-               .append("email = ?, ")
-               .append("notas = ?, ")
-               .append("tipoDoc = ?, ")
-               .append("NumDoc = ? ")
-               .append("WHERE idProvee = ?");
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE proveedores SET ")
+                .append("nombre = ?, ")
+                .append("direccion = ?, ")
+                .append("email = ?, ")
+                .append("notas = ?, ")
+                .append("tipoDoc = ?, ")
+                .append("NumDoc = ? ")
+                .append("WHERE idProvee = ?");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ps.setString(1, provee.getNombre());
@@ -92,7 +91,7 @@ public class DaoImplProveedores implements DaoProveedores{
                 mensaje = "Cero registros actualizados";
 
             }
-            }catch (Exception e) {
+        } catch (Exception e) {
             mensaje = e.getMessage();
         }
         return mensaje;
@@ -109,7 +108,7 @@ public class DaoImplProveedores implements DaoProveedores{
                 .append("notas, ")
                 .append("tipoDoc, ")
                 .append("NumDoc, ")
-                .append("estadoP")
+                .append("estado")
                 .append(") VALUES (?,?,?,?,?,?,?,1)");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
@@ -124,7 +123,7 @@ public class DaoImplProveedores implements DaoProveedores{
             if (resultado == 0) {
                 mensaje = "Cero registros agregados";
             }
-            } catch (Exception e) {
+        } catch (Exception e) {
             mensaje = e.getMessage();
             System.out.println(mensaje);
         }
@@ -133,29 +132,29 @@ public class DaoImplProveedores implements DaoProveedores{
 
     @Override
     public String proveedoresEliminar(Proveedores provee) {
-                StringBuilder sql = new StringBuilder();
+        StringBuilder sql = new StringBuilder();
         sql.append("UPDATE proveedores SET ")
                 .append("estado = 0 ")
                 .append("WHERE idProvee = ?");
-            try (Connection cn = conexion.getConexion()) {
+        try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ps.setString(1, provee.getIdProvee());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
-             mensaje = "Cero registros actualizados";
+                mensaje = "Cero registros actualizados";
             }
-          } catch (Exception e) {
+        } catch (Exception e) {
             mensaje = e.getMessage();
         }
-                return mensaje;
+        return mensaje;
     }
 
     @Override
     public String proveedoresRecuperar(Proveedores provee) {
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE proveedores SET ")
-        .append("estado = 1 ")
-        .append("WHERE idProvee = ?");
+                .append("estado = 1 ")
+                .append("WHERE idProvee = ?");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ps.setString(1, provee.getIdProvee());
@@ -171,23 +170,23 @@ public class DaoImplProveedores implements DaoProveedores{
 
     @Override
     public List<Proveedores> proveedoresSelectEliminados() {
-         List<Proveedores> listaProvee = null;
+        List<Proveedores> listaProvee = null;
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
-               .append("idProvee, ")
-               .append("nombre, ")
-               .append("direccion, ")
-               .append("email, ")
-               .append("notas, ")
-               .append("tipoDoc, ")
-               .append("NumDoc ")
-               .append("FROM proveedores ")
-               .append("WHERE estadoP = 0");
-               try (Connection cn = conexion.getConexion()) {
+                .append("idProvee, ")
+                .append("nombre, ")
+                .append("direccion, ")
+                .append("email, ")
+                .append("notas, ")
+                .append("tipoDoc, ")
+                .append("NumDoc ")
+                .append("FROM proveedores ")
+                .append("WHERE estado = 0");
+        try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ResultSet rs = ps.executeQuery();
             listaProvee = new ArrayList<>();
-                while (rs.next()) {
+            while (rs.next()) {
                 Proveedores provee = new Proveedores();
                 provee.setIdProvee(rs.getString(1));
                 provee.setNombre(rs.getString(2));
@@ -203,4 +202,4 @@ public class DaoImplProveedores implements DaoProveedores{
         }
         return listaProvee;
     }
-    }
+}

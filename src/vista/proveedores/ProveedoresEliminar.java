@@ -65,7 +65,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaNotas = new javax.swing.JTextArea();
-        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEliminarProveedores = new javax.swing.JTable();
 
@@ -102,27 +101,17 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel5.setText("Nombre del proveedor:");
 
-        txtNombre.setText("jTextField1");
-
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel6.setText("Dirección del proveedor:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel8.setText("Correo electrónico:");
 
-        txtDireccion.setText("jTextField1");
-
-        txtCorreo.setText("jTextField1");
-
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel4.setText("Tipo Documento:");
 
-        txtTipoDoc.setText("jTextField1");
-
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel3.setText("ID Proveedor:");
-
-        txtDocumento.setText("jTextField1");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel7.setText("Documento:");
@@ -139,8 +128,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        txtIDProveedor.setText("jTextField1");
 
         jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -229,16 +216,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jButton5.setBackground(new java.awt.Color(0, 0, 0));
-        jButton5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Volver");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         tblEliminarProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -256,8 +233,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jButton2)
-                .addGap(33, 33, 33)
-                .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(37, 37, 37))
@@ -284,7 +259,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton5)
                     .addComponent(jButton3))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -330,11 +304,13 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        ProveedorMenu.main(null);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        ProveedoresRecuperar.main(null);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -344,7 +320,7 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
 
             if (opcion == JOptionPane.YES_OPTION) {
                 String seleccionFila = tblEliminarProveedores.getValueAt(tblEliminarProveedores.getSelectedRow(), 0).toString();
-                data.setDireccion(seleccionFila);
+                data.setIdProvee(seleccionFila);
                 dao.proveedoresEliminar(data);
                 seleccion = false;
                 model.setRowCount(0);
@@ -363,10 +339,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,7 +405,6 @@ public class ProveedoresEliminar extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;

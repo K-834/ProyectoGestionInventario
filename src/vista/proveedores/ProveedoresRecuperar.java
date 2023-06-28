@@ -68,6 +68,11 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -158,6 +163,11 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ProveedoresEliminar.main(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -195,7 +205,7 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
     }
 
      private void datosSelect() {
-        lista = dao.proveedoresSelect();
+        lista = dao.proveedoresSelectEliminados();
         model.setRowCount(0);
         for (Proveedores prov : lista) {
             Object[] objeto = new Object[7];

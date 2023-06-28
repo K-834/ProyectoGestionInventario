@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista;
+package vista.usuario;
 
 
 import util.Memoria;
+import vista.Menu_administrador;
+import vista.Perfil;
 import vista.usuario.UsuarioAñadir;
 import vista.usuario.UsuarioBuscarDatos;
 import vista.usuario.UsuarioEditar;
@@ -15,11 +17,11 @@ import vista.usuario.UsuarioEliminar;
  *
  * @author LENOVO
  */
-public class Menu_admin_empleado extends javax.swing.JFrame {
+public class UsuarioMenu extends javax.swing.JFrame {
     /**
      * Creates new form menu
      */
-    public Menu_admin_empleado() {
+    public UsuarioMenu() {
         initComponents();
         lblNombre.setText(String.valueOf(Memoria.get("nomb")));
         String nivel = String.valueOf(Memoria.get("nivel"));
@@ -383,14 +385,18 @@ public class Menu_admin_empleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu_admin_empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu_admin_empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu_admin_empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu_admin_empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UsuarioMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -399,7 +405,7 @@ public class Menu_admin_empleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Menu_admin_empleado menu = new Menu_admin_empleado();
+                UsuarioMenu menu = new UsuarioMenu();
                 menu.setVisible(true);
                 menu.setLocationRelativeTo(null);
             }
