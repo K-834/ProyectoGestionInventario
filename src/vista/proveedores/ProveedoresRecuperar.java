@@ -4,17 +4,34 @@
  */
 package vista.proveedores;
 
+import dao.DaoProveedores;
+import dao.impl.DaoImplProveedores;
+import entidades.Proveedores;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Anghello
  */
 public class ProveedoresRecuperar extends javax.swing.JFrame {
-
+    
+    private DaoProveedores dao;
+    private List<Proveedores> lista;
+    private DefaultTableModel model;
+    private Proveedores data;
+    
     /**
      * Creates new form ProveedoresRecuperar
      */
     public ProveedoresRecuperar() {
         initComponents();
+        dao = new DaoImplProveedores();
+        data = new Proveedores();
+        model = (DefaultTableModel) tblRecuperarProveedores.getModel();
+        
+        datosSelect();
     }
 
     /**
@@ -27,36 +44,49 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRecuperarProveedores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel1.setText("Recuperar Proveedores");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRecuperarProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID proveedor", "Nombre", "RUC", "Dirección", "Número", "Email", "Número", "Notas"
+                "ID proveedor", "Nombre", "Dirección", "Email", "tipo Documento", "Documento", "Notas"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblRecuperarProveedores);
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Recuperar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Recuperar Proveedores");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,27 +99,31 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(371, 371, 371)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel2)))
                 .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(71, 71, 71)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(139, 139, 139))
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(76, 76, 76)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
+                        .addGap(35, 35, 35))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,6 +139,34 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        
+            try {
+            String seleccionFila = tblRecuperarProveedores.getValueAt(tblRecuperarProveedores.getSelectedRow(), 0).toString();
+            data.setIdProvee(seleccionFila);
+            dao.proveedoresRecuperar(data);
+            model.setRowCount(0);
+            datosSelect();
+            JOptionPane.showMessageDialog(null, "Se ha recuperado exitosamente",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
+           
+            
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila",
+                    "Información",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ProveedoresEliminar.main(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,12 +204,31 @@ public class ProveedoresRecuperar extends javax.swing.JFrame {
         });
     }
 
+     private void datosSelect() {
+        lista = dao.proveedoresSelectEliminados();
+        model.setRowCount(0);
+        for (Proveedores prov : lista) {
+            Object[] objeto = new Object[7];
+            objeto[0] = prov.getIdProvee();
+            objeto[1] = prov.getNombre();
+            objeto[2] = prov.getDireccion();
+            objeto[3] = prov.getEmail();
+            objeto[4] = prov.getTipoDoc();
+            objeto[5] = prov.getNumDoc();
+            objeto[6] = prov.getNotas();
+            model.addRow(objeto);
+        }
+
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblRecuperarProveedores;
     // End of variables declaration//GEN-END:variables
 }

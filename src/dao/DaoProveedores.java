@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface DaoProveedores {
     String getMensaje();
+    
     List <Proveedores> proveedoresSelect();
     
     String proveedoresEditar(Proveedores provee);
