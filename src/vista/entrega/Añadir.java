@@ -4,6 +4,13 @@
  */
 package vista.entrega;
 
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.Reader;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import dao.DaoDatos;
 import dao.DaoHistorial;
 import dao.DaoProducto;
@@ -13,13 +20,20 @@ import dao.impl.DaoImplProducto;
 import entidades.Datos;
 import entidades.Historial;
 import entidades.Producto;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import util.Memoria;
@@ -40,7 +54,9 @@ public class Añadir extends javax.swing.JFrame {
     public JTable table;
     public DefaultTableModel model;
     private Datos data;
-    
+    private String fechaCad;
+    private boolean Cad;
+
     private DaoHistorial daoH;
     private Historial dataH;
     DateTimeFormatter formato;
@@ -59,15 +75,16 @@ public class Añadir extends javax.swing.JFrame {
         daoV = new Producto();
 
         formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
+
         model = (DefaultTableModel) tblAñadir.getModel();
         formato2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-         
+
         daoH = new DaoImplHistorial();
         dataH = new Historial();
-        
+
         datosSelect();
         lblValidar.setText("");
+        lblSeleccionAlmacen.setText("");
 
     }
 
@@ -81,6 +98,9 @@ public class Añadir extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        menuBar1 = new java.awt.MenuBar();
+        menu1 = new java.awt.Menu();
+        menu2 = new java.awt.Menu();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
@@ -101,6 +121,15 @@ public class Añadir extends javax.swing.JFrame {
         txtProveedorCodigo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JSpinner();
+        btnIngresar1 = new javax.swing.JButton();
+        jblpathQR = new javax.swing.JLabel();
+        lblSeleccionAlmacen = new javax.swing.JLabel();
+
+        menu1.setLabel("File");
+        menuBar1.add(menu1);
+
+        menu2.setLabel("Edit");
+        menuBar1.add(menu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,7 +142,7 @@ public class Añadir extends javax.swing.JFrame {
         btnIngresar.setBackground(new java.awt.Color(0, 0, 0));
         btnIngresar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnIngresar.setText("Añadir Producto");
+        btnIngresar.setText("SCANNER QR");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -232,29 +261,30 @@ public class Añadir extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Codigo Proveedor               :");
 
+        btnIngresar1.setBackground(new java.awt.Color(0, 0, 0));
+        btnIngresar1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnIngresar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar1.setText("Añadir Producto");
+        btnIngresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresar1ActionPerformed(evt);
+            }
+        });
+
+        jblpathQR.setForeground(new java.awt.Color(0, 204, 0));
+
+        lblSeleccionAlmacen.setForeground(new java.awt.Color(255, 51, 51));
+        lblSeleccionAlmacen.setText("jLabel3");
+        lblSeleccionAlmacen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lblSeleccionAlmacenKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2)
-                            .addGap(57, 57, 57))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnIngresar)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(68, 68, 68)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(260, 260, 260))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,11 +306,13 @@ public class Añadir extends javax.swing.JFrame {
                                 .addComponent(jLabel6)
                                 .addGap(56, 56, 56)
                                 .addComponent(txtProveedorCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSeleccionAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(65, 65, 65))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jLabel2)
-                        .addGap(57, 57, 57)
+                        .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,6 +322,28 @@ public class Añadir extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(260, 260, 260))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(57, 57, 57))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnIngresar)
+                                .addGap(302, 302, 302)
+                                .addComponent(btnIngresar1)
+                                .addGap(68, 68, 68))))
+                    .addComponent(jblpathQR, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +364,8 @@ public class Añadir extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(boxAlm4)
-                        .addComponent(boxAlm3))
+                        .addComponent(boxAlm3)
+                        .addComponent(lblSeleccionAlmacen))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(boxAlm2)
                         .addComponent(boxAlm1)))
@@ -320,11 +375,15 @@ public class Añadir extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(txtProveedorCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnIngresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIngresar)
+                    .addComponent(btnIngresar1))
+                .addGap(5, 5, 5)
+                .addComponent(jblpathQR)
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
@@ -367,23 +426,7 @@ public class Añadir extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        if (!txtProducto.getText().isBlank()
-                && !txtCantidad.getValue().equals("0")
-                && (boxAlm1.isSelected() || boxAlm2.isSelected() || boxAlm3.isSelected() || boxAlm4.isSelected())) {
-
-            datos();
-            txtProducto.setText("");
-            txtCantidad.setValue(0);
-            buttonGroup1.clearSelection();
-            txtProveedorCodigo.setText("");
-            datosSelect();
-        } else {
-            JOptionPane.showMessageDialog(null, "Falta Ingresar datos",
-                    "Información",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-
-
+        procesoQR();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -427,6 +470,30 @@ public class Añadir extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_lblValidarKeyTyped
+
+    private void btnIngresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresar1ActionPerformed
+        // TODO add your handling code here:
+        if (!txtProducto.getText().isBlank()
+                && !txtCantidad.getValue().equals("0")
+                && (boxAlm1.isSelected() || boxAlm2.isSelected() || boxAlm3.isSelected() || boxAlm4.isSelected())) {
+
+            datos();
+            txtProducto.setText("");
+            txtCantidad.setValue(0);
+            buttonGroup1.clearSelection();
+            txtProveedorCodigo.setText("");
+            datosSelect();
+        } else {
+            JOptionPane.showMessageDialog(null, "Falta Ingresar datos",
+                    "Información",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnIngresar1ActionPerformed
+
+    private void lblSeleccionAlmacenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblSeleccionAlmacenKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblSeleccionAlmacenKeyTyped
 
     /**
      * @param args the command line arguments
@@ -495,29 +562,13 @@ public class Añadir extends javax.swing.JFrame {
             almacen = "ALMACEN 4";
         }
 
-        data.setCodProducto(txtProducto.getText().toUpperCase());
-        data.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
-        data.setFechaIngreso(strFechaEntrega);
-        data.setFechaCaducidad(strFechaCaducidad);
-        data.setUbicacion(almacen);
-        data.setIdProveedor(txtProveedorCodigo.getText());
-        dao.datosInsertar(data);
-        
-         String ahoraH = "Producto: " +txtProducto.getText()+ "\n " +
-                    "Cantidad: " +txtCantidad.getValue()+ "\n " +
-                    "Almacen: " +almacen+"\n " +
-                    "Proveedor: " +txtProveedorCodigo.getText()+"\n " +
-                    "Entrega: " +strFechaEntrega ;
-        
-        
-            dataH.setIdStock(0);
-            dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
-            dataH.setHistorial("AÑADIR:");
-            dataH.setFechaCambio(LocalDateTime.now().format(formato2));
-            dataH.setDescripcion(ahoraH);
-            daoH.userInsertar(dataH);
+        if (Cad) {
+            fechaCad = strFechaCaducidad;
+        }
 
+        envioDatos(strFechaEntrega, fechaCad, almacen);
 
+        Cad = true;
     }
 
     private void vistaEliminar() {
@@ -532,6 +583,94 @@ public class Añadir extends javax.swing.JFrame {
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
         this.dispose();
+    }
+
+    private void procesoQR() {
+        Reader lector = new MultiFormatReader();
+        JFileChooser ventanaDoc = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png");
+        ventanaDoc.setFileFilter(filtro);
+        int rs = ventanaDoc.showOpenDialog(null);
+        if (rs == JFileChooser.APPROVE_OPTION) {
+            BufferedImage imagen;
+            File file = ventanaDoc.getSelectedFile();
+            if (filtro.accept(file)) {
+                jblpathQR.setText(" Archivo seleccionado ");
+                File ubicacionImagen = new File(file.getAbsolutePath());
+                try {
+                    System.out.println(ubicacionImagen);
+                    imagen = ImageIO.read(ubicacionImagen);
+                    LuminanceSource fuente = new BufferedImageLuminanceSource(imagen);
+                    BinaryBitmap mapaBits = new BinaryBitmap(new HybridBinarizer(fuente));
+                    try {
+                        Result resultado = lector.decode(mapaBits);
+                        String texto = resultado.getText();
+                        String[] datosSeparados = texto.split(",");
+
+                        if (datosSeparados.length == 4) {
+
+                            String codProd = datosSeparados[0].trim();
+                            String cantidad = datosSeparados[1].trim();
+                            String fechaCaducidad = datosSeparados[2].trim();
+                            String codProv = datosSeparados[3].trim();
+
+                            txtProducto.setText(codProd);
+                            txtCantidad.setValue(Integer.valueOf(cantidad));
+                            txtProveedorCodigo.setText(codProv);
+
+                            fechaCad = fechaCaducidad;
+                            Cad = false;
+                            txtProducto.setEnabled(Cad);
+                            txtCantidad.setEnabled(Cad);
+                            txtProveedorCodigo.setEnabled(Cad);
+                            lblSeleccionAlmacen.setText("<- Seleccione");
+
+                        } else {
+                            jblpathQR.setText("El código QR no contiene suficientes datos.");
+                            jblpathQR.setForeground(Color.RED);
+                        }
+                    } catch (Exception e) {
+                        jblpathQR.setText("No se pudo leer el código QR.");
+                        jblpathQR.setForeground(Color.RED);
+                    }
+                } catch (IOException e) {
+                    jblpathQR.setText("Problemas con la imagen");
+                    jblpathQR.setForeground(Color.RED);
+                }
+            } else {
+                jblpathQR.setText(" Tipo de archivo incorrecto");
+                jblpathQR.setForeground(Color.RED);
+            }
+
+        } else {
+            jblpathQR.setText(" No se seleccionó ningún archivo.");
+            jblpathQR.setForeground(Color.RED);
+        }
+
+    }
+
+    private void envioDatos(String entrega, String caducidad, String almacen) {
+        data.setCodProducto(txtProducto.getText().toUpperCase());
+        data.setCantidad(Integer.parseInt(txtCantidad.getValue().toString()));
+        data.setFechaIngreso(entrega);
+        data.setFechaCaducidad(caducidad);
+        data.setUbicacion(almacen);
+        data.setIdProveedor(txtProveedorCodigo.getText());
+        dao.datosInsertar(data);
+
+        String ahoraH = "Producto: " + txtProducto.getText() + "\n "
+                + "Cantidad: " + txtCantidad.getValue() + "\n "
+                + "Almacen: " + almacen + "\n "
+                + "Proveedor: " + txtProveedorCodigo.getText() + "\n "
+                + "Entrega: " + entrega;
+
+        dataH.setIdStock(0);
+        dataH.setIdUsuario((String) Memoria.get("codigoEmpleado"));
+        dataH.setHistorial("AÑADIR:");
+        dataH.setFechaCambio(LocalDateTime.now().format(formato2));
+        dataH.setDescripcion(ahoraH);
+        daoH.userInsertar(dataH);
+
     }
 
     private void datosSelect() {
@@ -551,12 +690,15 @@ public class Añadir extends javax.swing.JFrame {
         }
 
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox boxAlm1;
     private javax.swing.JCheckBox boxAlm2;
     private javax.swing.JCheckBox boxAlm3;
     private javax.swing.JCheckBox boxAlm4;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnIngresar1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -568,7 +710,12 @@ public class Añadir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jblpathQR;
+    private javax.swing.JLabel lblSeleccionAlmacen;
     private javax.swing.JLabel lblValidar;
+    private java.awt.Menu menu1;
+    private java.awt.Menu menu2;
+    private java.awt.MenuBar menuBar1;
     private javax.swing.JTable tblAñadir;
     private javax.swing.JSpinner txtCantidad;
     private javax.swing.JTextField txtProducto;
