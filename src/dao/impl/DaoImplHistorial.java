@@ -32,30 +32,24 @@ public class DaoImplHistorial implements DaoHistorial {
     }
 
     @Override
-    public List<Historial> userSelect() {
+    public List<Historial> userSelectHistorial(String usuario) {
         List<Historial> lista = null;
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
-                .append("idStock, ")
-                .append("codProducto, ")
-                .append("cantidad, ")
-                .append("fechaEntrada, ")
-                .append("fechaCaducidad, ")
-                .append("ubicacion ")
-                .append("FROM inventario ")
-                .append("WHERE estado = 1 ")
+                .append("historial, ")
+                .append("descripcion ")
+                .append("FROM detalles ")
+                .append("WHERE idUsuario = ? ")
                 .append("ORDER BY idCambio DESC");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
+            ps.setString(1, usuario);
             ResultSet rs = ps.executeQuery();
             lista = new ArrayList<>();
             while (rs.next()) {
                 Historial histo = new Historial();
-                 histo.setIdCambio(rs.getInt(1));
-                histo.setIdStock(rs.getInt(2));
-                histo.setIdUsuario(rs.getString(3));
-                histo.setHistorial(rs.getString(4));
-                histo.setFechaCambio(rs.getString(5));
+                histo.setHistorial(rs.getString(1));
+                histo.setDescripcion(rs.getString(2));
                 lista.add(histo);
             }
         } catch (Exception e) {
@@ -86,6 +80,7 @@ public class DaoImplHistorial implements DaoHistorial {
             if (resultado == 0) {
                 mensaje = "Cero registros agregados";
             }
+            
         } catch (Exception e) {
             mensaje = e.getMessage();
             System.out.println(mensaje);

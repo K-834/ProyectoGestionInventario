@@ -207,7 +207,8 @@ public class DaoImplUsuario implements DaoUsuario {
                 .append("nombre, ")
                 .append("apellido, ")
                 .append("correo, ")
-                .append("telefono ")
+                .append("telefono, ")
+                .append("imagen ")
                 .append("FROM usuario ")
                 .append("WHERE idUsuario = ? ");
         try (Connection cn = conexion.getConexion()) {
@@ -220,6 +221,7 @@ public class DaoImplUsuario implements DaoUsuario {
                 adm.setApellido(resultado.getString(2));
                 adm.setCorreo(resultado.getString(3));
                 adm.setTelefono(resultado.getInt(4));
+                adm.setImagen(resultado.getBytes(5));
             }
         } catch (Exception e) {
             mensaje = e.getMessage();

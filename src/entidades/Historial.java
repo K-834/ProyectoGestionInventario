@@ -16,6 +16,7 @@ public class Historial {
     private String fechaCambio;
     private String descripcion;
     
+    //Grafico
     private String historialELiminar;
     private String historialRecuperado;
     private String historialEditado;
