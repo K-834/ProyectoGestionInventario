@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface DaoHistorial {
 
-    List<Historial> userSelect();
+    List<Historial> userSelectHistorial(String usuario);
 
     String userInsertar(Historial histo);
 
