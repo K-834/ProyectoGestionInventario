@@ -115,13 +115,13 @@ public class DaoImplProducto implements DaoProducto {
 
     @Override
     public String productoEliminar(Producto prod) {
-         StringBuilder sql = new StringBuilder();
+        StringBuilder sql = new StringBuilder();
         sql.append("UPDATE producto SET ")
                 .append("estado = 0 ")
                 .append("WHERE codProducto = ?");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
-           ps.setString(1, prod.getCodProducto());
+            ps.setString(1, prod.getCodProducto());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
                 mensaje = "Cero registros eliminados";
@@ -130,7 +130,7 @@ public class DaoImplProducto implements DaoProducto {
             mensaje = e.getMessage();
         }
         return mensaje;
-    
+
     }
 
     @Override
@@ -141,7 +141,7 @@ public class DaoImplProducto implements DaoProducto {
                 .append("WHERE codProducto = ?");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
-           ps.setString(1, prod.getCodProducto());
+            ps.setString(1, prod.getCodProducto());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
                 mensaje = "Cero registros recuperados";
@@ -150,12 +150,12 @@ public class DaoImplProducto implements DaoProducto {
             mensaje = e.getMessage();
         }
         return mensaje;
-    
+
     }
 
     @Override
     public List<Producto> productoSelectEliminados() {
-       List<Producto> lista = null;
+        List<Producto> lista = null;
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
                 .append("codProducto, ")
@@ -195,13 +195,45 @@ public class DaoImplProducto implements DaoProducto {
             if (rs.next()) {
                 prod.setNombre(rs.getString(1));
             }
-            
+
         } catch (Exception e) {
             mensaje = "0";
         }
-        return mensaje;   
-    
+        return mensaje;
+
+    }
+
+    @Override
+    public List<Producto> productoMovimiento(String fechaInicio, String fechaFin, String codProducto) {
+        List<Producto> lista = new ArrayList<>();
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT p.nombre, i.fechaEntrada, SUM(i.cantidad) AS cantidad ")
+                .append("FROM inventario i ")
+                .append("INNER JOIN producto p ON i.codProducto = p.codProducto ")
+                .append("WHERE i.fechaEntrada >= ? AND i.fechaEntrada <= ? ")
+                .append("AND p.codProducto = ? ")
+                .append("GROUP BY p.nombre, i.fechaEntrada");
+        try (Connection cn = conexion.getConexion(); 
+                PreparedStatement ps = cn.prepareStatement(sql.toString())) {
+            ps.setString(1, fechaInicio);
+            ps.setString(2, fechaFin);
+            ps.setString(3, codProducto);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Producto prod = new Producto();
+                    prod.setNombre(rs.getString(1));
+                    prod.setFecha1(rs.getString(2));
+                    prod.setCantidad(rs.getInt(3));
+                    lista.add(prod);
+                }
+
+            } 
+        } catch (Exception e) {
+            mensaje = e.getMessage();
+        }
+        return lista;
+
     }
 
 }
-

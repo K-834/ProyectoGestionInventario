@@ -12,7 +12,8 @@ import java.util.List;
  * @author antho
  */
 public interface DaoProducto {
-     String getMensaje();
+    String getMensaje();
+    
     List <Producto> productoSelect();
     
     String productoditar(Producto prod);
@@ -26,4 +27,6 @@ public interface DaoProducto {
     List<Producto> productoSelectEliminados();
     
     String datosSelect(Producto prod);
+    
+    List<Producto> productoMovimiento(String fechaInicio, String fechaFin, String codProducto);
 }

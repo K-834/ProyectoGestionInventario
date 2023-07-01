@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista.entrega;
+package vista.proveedores;
 
-import vista.reportes.ViewReporte;
-import dao.DaoDatos;
-import dao.impl.DaoImplDatos;
-import entidades.Datos;
+
+import vista.producto.*;
+import dao.DaoProveedores;
+import dao.impl.DaoImplProveedores;
+import entidades.Proveedores;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
@@ -18,21 +19,21 @@ import vista.Menu;
  *
  * @author Anghello
  */
-public class Caduca extends javax.swing.JFrame {
+public class ProveedoresBusqueda extends javax.swing.JFrame {
 
-    private DaoDatos dao;
-    private List<Datos> lista;
+    private DaoProveedores dao;
+    private List<Proveedores> lista;
     private DefaultTableModel model;
-    private Datos data;
+    private Proveedores data;
     TableRowSorter<DefaultTableModel> obj;
 
-    public Caduca() {
+    public ProveedoresBusqueda() {
 
         initComponents();
         model = (DefaultTableModel) tblBuscar.getModel();
         obj = new TableRowSorter<>(model);
-        dao = new DaoImplDatos();
-        data = new Datos();
+        dao = new DaoImplProveedores();
+        data = new Proveedores();
         tblBuscar.setRowSorter(obj);
 
         datosSelect();
@@ -74,7 +75,7 @@ public class Caduca extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Tabla de Entregas");
+        jLabel1.setText("Busqueda de Proveedor");
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
@@ -122,26 +123,25 @@ public class Caduca extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnVolver)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(282, 282, 282))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnVolver)
+                                .addGap(163, 163, 163)
+                                .addComponent(jLabel1)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel1)))
-                .addGap(42, 42, 42)
+                    .addComponent(jLabel1))
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -177,8 +177,8 @@ public class Caduca extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        vistaMenu();
-     
+        ProveedorMenu.main(null);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
@@ -198,14 +198,18 @@ public class Caduca extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedoresBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -214,8 +218,7 @@ public class Caduca extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Datos data = new Datos();
-                Caduca bus = new Caduca();
+                ProveedoresBusqueda bus = new ProveedoresBusqueda();
                 bus.setLocationRelativeTo(null);
                 bus.setVisible(true);
                 //    new Caduca().setVisible(true);
@@ -223,27 +226,21 @@ public class Caduca extends javax.swing.JFrame {
         });
     }
 
-    private void vistaMenu() {
-        Menu menu = new Menu();
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
-        this.dispose();
-    }
-
-    private void datosSelect() {
-        lista = dao.datosSelect();
+   private void datosSelect() {
+        lista = dao.proveedoresSelect();
         model.setRowCount(0);
-        for (Datos dat : lista) {
+        for (Proveedores prov : lista) {
             Object[] objeto = new Object[7];
-            objeto[0] = dat.getIdStock();
-            objeto[1] = dat.getCodProducto();
-            objeto[2] = dat.getCantidad();
-            objeto[3] = dat.getFechaIngreso();
-            objeto[4] = dat.getFechaCaducidad();
-            objeto[5] = dat.getUbicacion();
-            objeto[6] = dat.getIdProveedor();
+            objeto[0] = prov.getIdProvee();
+            objeto[1] = prov.getNombre();
+            objeto[2] = prov.getDireccion();
+            objeto[3] = prov.getEmail();
+            objeto[4] = prov.getTipoDoc();
+            objeto[5] = prov.getNumDoc();
+            objeto[6] = prov.getNotas();
             model.addRow(objeto);
         }
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
