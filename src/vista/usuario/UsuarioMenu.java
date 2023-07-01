@@ -80,7 +80,7 @@ public class UsuarioMenu extends javax.swing.JFrame {
         Volver.setBackground(new java.awt.Color(0, 0, 0));
         Volver.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         Volver.setForeground(new java.awt.Color(255, 255, 255));
-        Volver.setText("Editar");
+        Volver.setText("Volver");
         Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VolverActionPerformed(evt);

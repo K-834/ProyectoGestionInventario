@@ -21,7 +21,7 @@ public class Proveedores {
     public Proveedores() {
     }
 
-    public Proveedores(String nombre, String direccion, String email, String notas, String idProvee, String tipoDoc, int numDoc, int estadoP) {
+    public Proveedores(String nombre, String string1, String string2, String string3, String string4, String string5, int aInt) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
