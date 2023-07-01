@@ -13,7 +13,6 @@ import entidades.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.util.Base64;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +23,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import util.Memoria;
-import vista.Menu_administrador;
 
 /**
  *
@@ -105,7 +103,7 @@ public class UsuarioHistorial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tipo de Cambio", "Descripcion"
+                "Tipo de Cambio", "Fecha - Hora"
             }
         ));
         jScrollPane1.setViewportView(tblBuscar);
@@ -291,15 +289,15 @@ public class UsuarioHistorial extends javax.swing.JFrame {
     private void perfilImg() {
         daoU = new DaoImplUsuario();
         Usuario user = daoU.UsuarioPerfil(usuario);
-        System.out.println(usuario);
         if (user.getImagen() != null) {
             byte[] imagenBytes = user.getImagen();
             ImageIcon icono = new ImageIcon(imagenBytes);
             Image imagen = icono.getImage();
-            Image imagenRedimensionada = imagen.getScaledInstance(280, 217, Image.SCALE_SMOOTH);
-            ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
-            ImgPerfilEmpleado.setIcon(iconoRedimensionado);
+            Image tamañoImg = imagen.getScaledInstance(280, 217, Image.SCALE_SMOOTH);
+            ImageIcon tamañoIcon=  new ImageIcon(tamañoImg);
+            ImgPerfilEmpleado.setIcon(tamañoIcon);
         } else {
+
             ImgPerfilEmpleado.setIcon(null);
         }
     }
@@ -310,7 +308,7 @@ public class UsuarioHistorial extends javax.swing.JFrame {
         for (Historial dat : lista) {
             Object[] objeto = new Object[2];
             objeto[0] = dat.getHistorial();
-            objeto[1] = dat.getDescripcion();
+            objeto[1] = dat.getFechaCambio();
             model.addRow(objeto);
         }
         perfilImg();

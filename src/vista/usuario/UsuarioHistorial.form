@@ -166,7 +166,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
                     <Column editable="true" title="Tipo de Cambio" type="java.lang.Object"/>
-                    <Column editable="true" title="Descripcion" type="java.lang.Object"/>
+                    <Column editable="true" title="Fecha - Hora" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

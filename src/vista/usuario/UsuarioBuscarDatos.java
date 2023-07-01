@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -38,6 +39,7 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
     private List<Usuario> lista;
     private DefaultTableModel model;
     private Usuario data;
+    private Boolean SeleccionU = false;
     TableRowSorter<DefaultTableModel> obj;
 
     /**
@@ -237,9 +239,14 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerDatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatos1ActionPerformed
-        Memoria.put("EmpleadoHistorial", txtCodEmpleado.getText());
-        UsuarioHistorial histo  = new UsuarioHistorial();
-        histo.setVisible(true);
+        if (SeleccionU) {
+             Memoria.put("EmpleadoHistorial", txtCodEmpleado.getText());
+            UsuarioHistorial histo  = new UsuarioHistorial();
+            histo.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un empleado", "Información", JOptionPane.ERROR_MESSAGE);
+        
+        }
 
     }//GEN-LAST:event_btnVerDatos1ActionPerformed
 
@@ -250,7 +257,12 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
-        txtCodEmpleado.setText(tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0).toString());
+        try {
+            txtCodEmpleado.setText(tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0).toString());
+            SeleccionU = true;
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Información", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
