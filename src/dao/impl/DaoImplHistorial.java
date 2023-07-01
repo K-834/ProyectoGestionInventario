@@ -37,7 +37,7 @@ public class DaoImplHistorial implements DaoHistorial {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
                 .append("historial, ")
-                .append("descripcion ")
+                .append("fechaCambio ")
                 .append("FROM detalles ")
                 .append("WHERE idUsuario = ? ")
                 .append("ORDER BY idCambio DESC");
@@ -49,7 +49,7 @@ public class DaoImplHistorial implements DaoHistorial {
             while (rs.next()) {
                 Historial histo = new Historial();
                 histo.setHistorial(rs.getString(1));
-                histo.setDescripcion(rs.getString(2));
+                histo.setFechaCambio(rs.getString(2));
                 lista.add(histo);
             }
         } catch (Exception e) {
