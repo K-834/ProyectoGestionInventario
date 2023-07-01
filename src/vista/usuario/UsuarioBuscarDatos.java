@@ -13,7 +13,11 @@ import entidades.Historial;
 import entidades.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,6 +26,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import util.Memoria;
 import vista.Menu_administrador;
 
 /**
@@ -34,6 +39,7 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
     private List<Usuario> lista;
     private DefaultTableModel model;
     private Usuario data;
+    private Boolean SeleccionU = false;
     TableRowSorter<DefaultTableModel> obj;
 
     /**
@@ -66,13 +72,12 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
         Id = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuscar = new javax.swing.JTable();
-        btnVerDatos = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtCodEmpleado = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnVerDatos1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,28 +124,10 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblBuscar);
 
-        btnVerDatos.setText("Ver Datos");
-        btnVerDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerDatosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("<- Selecciona los datos en tabla o digita");
+        jLabel3.setText("<- Selecciona los datos en la tabla o digita");
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
@@ -154,10 +141,17 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Comparar");
+        jButton1.setText("Comparar Empleados");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnVerDatos1.setText("Ver Historial de un Empleado");
+        btnVerDatos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDatos1ActionPerformed(evt);
             }
         });
 
@@ -168,11 +162,6 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(571, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -180,7 +169,7 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCodEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSeleccionar))
@@ -191,14 +180,17 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(259, 259, 259)))
                         .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(btnVerDatos)
-                        .addGap(36, 36, 36)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(15, 15, 15))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(btnVerDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,15 +215,13 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSeleccionar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVerDatos))
-                        .addGap(26, 26, 26))
+                        .addContainerGap(176, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(17, 17, 17))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVerDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -242,73 +232,54 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVerDatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatos1ActionPerformed
+        if (SeleccionU) {
+             Memoria.put("EmpleadoHistorial", txtCodEmpleado.getText());
+            UsuarioHistorial histo  = new UsuarioHistorial();
+            histo.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un empleado", "Información", JOptionPane.ERROR_MESSAGE);
+        
+        }
+
+    }//GEN-LAST:event_btnVerDatos1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        UsuarioDatosComparar.main(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+        try {
+            txtCodEmpleado.setText(tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0).toString());
+            SeleccionU = true;
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila", "Información", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void IdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdKeyPressed
+
+        obj.setRowFilter(RowFilter.regexFilter(Id.getText()));
+    }//GEN-LAST:event_IdKeyPressed
+
+    private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
         Menu_administrador.main(null);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IdActionPerformed
-
-    private void IdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdKeyPressed
-
-        obj.setRowFilter(RowFilter.regexFilter(Id.getText()));
-
-    }//GEN-LAST:event_IdKeyPressed
-
-    private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
-        // TODO add your handling code here:
-        String empleado = txtCodEmpleado.getText();
-        DaoHistorial daoH = new DaoImplHistorial();
-        try {
-            Historial userH = daoH.userGrafico(empleado);
-        int n1 = Integer.parseInt(userH.getHistorialAñadir());
-        int n2 = Integer.parseInt(userH.getHistorialELiminar());
-        int n3 = Integer.parseInt(userH.getHistorialEditado());
-        int n4 = Integer.parseInt(userH.getHistorialLogeado());
-        int n5 = Integer.parseInt(userH.getHistorialRecuperado());
-        int n6 = Integer.parseInt(userH.getHistorialReporte());
-        DefaultCategoryDataset tablaDatos = new DefaultCategoryDataset();
-        tablaDatos.setValue(n1, "Eliminar", empleado);
-        tablaDatos.setValue(n2, "Añadir", empleado);
-        tablaDatos.setValue(n3, "Editar", empleado);
-        tablaDatos.setValue(n4, "Logeado", empleado);
-        tablaDatos.setValue(n5, "Recuperado", empleado);
-        tablaDatos.setValue(n6, "Reporte", empleado);
-        
-        JFreeChart grafico = ChartFactory.createBarChart3D("Cambios de Usuario", "Empleado", "Cantidad", tablaDatos,PlotOrientation.VERTICAL,true,true,false);
-        ChartPanel panel = new ChartPanel(grafico);
-        panel.setMouseWheelEnabled(true);
-        panel.setPreferredSize(new Dimension(500,200));
-        jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(panel,BorderLayout.NORTH);
-        
-        pack();
-        repaint();
-        } catch (Exception e) {
-            System.out.println(daoH.getMensaje());;
-        }
-        
-    }//GEN-LAST:event_btnVerDatosActionPerformed
-
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        // TODO add your handling code here:
-        txtCodEmpleado.setText(tblBuscar.getValueAt(tblBuscar.getSelectedRow(), 0).toString());
-     
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        UsuarioDatosComparar.main(null);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,7 +344,7 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Id;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JButton btnVerDatos;
+    private javax.swing.JButton btnVerDatos1;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -381,7 +352,6 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBuscar;
     private javax.swing.JTextField txtCodEmpleado;

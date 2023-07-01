@@ -21,11 +21,12 @@ public class Usuario {
     private int telefono;
     private int nivelSeguridad;
     private String contraseña;
+    private byte[] imagen;
 
     public Usuario() {
     }
 
-    public Usuario(int estado, String codigo, String nombre, String apellido, String correo, int telefono, int nivelSeguridad, String contraseña) {
+    public Usuario(int estado, String codigo, String nombre, String apellido, String correo, int telefono, int nivelSeguridad, String contraseña, byte[] imagen) {
         this.estado = estado;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -34,11 +35,12 @@ public class Usuario {
         this.telefono = telefono;
         this.nivelSeguridad = nivelSeguridad;
         this.contraseña = contraseña;
+        this.imagen = imagen;
     }
-    
 
    
-
+  
+   
     
     public String getNombre() {
         return nombre;
@@ -113,6 +115,12 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    
-    
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
 }
