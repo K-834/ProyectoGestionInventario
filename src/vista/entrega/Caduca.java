@@ -50,7 +50,6 @@ public class Caduca extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
-        btnDatosGenerales1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
@@ -70,16 +69,6 @@ public class Caduca extends javax.swing.JFrame {
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
-            }
-        });
-
-        btnDatosGenerales1.setBackground(new java.awt.Color(0, 0, 0));
-        btnDatosGenerales1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        btnDatosGenerales1.setForeground(new java.awt.Color(255, 255, 255));
-        btnDatosGenerales1.setText("Datos Generales");
-        btnDatosGenerales1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDatosGenerales1ActionPerformed(evt);
             }
         });
 
@@ -141,9 +130,7 @@ public class Caduca extends javax.swing.JFrame {
                         .addComponent(btnVolver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(119, 119, 119)
-                        .addComponent(btnDatosGenerales1)
-                        .addGap(26, 26, 26))))
+                        .addGap(282, 282, 282))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +138,6 @@ public class Caduca extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVolver)
-                    .addComponent(btnDatosGenerales1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel1)))
@@ -193,14 +179,6 @@ public class Caduca extends javax.swing.JFrame {
         // TODO add your handling code here:
         vistaMenu();
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void btnDatosGenerales1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosGenerales1ActionPerformed
-
-        ViewReporte cadGeneral = new ViewReporte();
-        cadGeneral.setVisible(true);
-        cadGeneral.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnDatosGenerales1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +245,6 @@ public class Caduca extends javax.swing.JFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDatosGenerales1;
     private javax.swing.JButton btnVolver;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
