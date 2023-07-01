@@ -61,6 +61,9 @@ public class UsuarioRecuperar extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Recuperar Usuario");
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
         tblDatosRecuperar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
