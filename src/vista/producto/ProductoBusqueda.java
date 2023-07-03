@@ -7,12 +7,17 @@ package vista.producto;
 import dao.DaoProducto;
 import dao.impl.DaoImplProducto;
 import entidades.Producto;
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
-
+import util.Memoria;
 
 /**
  *
@@ -36,8 +41,9 @@ public class ProductoBusqueda extends javax.swing.JFrame {
         dao = new DaoImplProducto();
         data = new Producto();
         tblBuscar1.setRowSorter(obj);
-
+        btnMovimientoGrafico.setEnabled(false);
         productoSelect();
+        txtIDproducto.enable(false);
     }
 
     /**
@@ -50,7 +56,7 @@ public class ProductoBusqueda extends javax.swing.JFrame {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
-        jPanel1 = new javax.swing.JPanel();
+        actualizar = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -66,12 +72,16 @@ public class ProductoBusqueda extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnMovimientoGrafico = new javax.swing.JButton();
+        btnSeleccionMov = new javax.swing.JButton();
+        btnVolver1 = new javax.swing.JButton();
+        btnMovimiento2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        actualizar.setBackground(new java.awt.Color(0, 0, 0));
+        actualizar.setForeground(new java.awt.Color(255, 255, 255));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
         btnVolver.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -176,44 +186,56 @@ public class ProductoBusqueda extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Desde :");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnVolver)
-                                .addGap(163, 163, 163)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 25, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(btnMovimiento)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        btnMovimientoGrafico.setText("Ver Grafico Movimiento");
+        btnMovimientoGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMovimientoGraficoActionPerformed(evt);
+            }
+        });
+
+        btnSeleccionMov.setBackground(new java.awt.Color(0, 0, 0));
+        btnSeleccionMov.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionMov.setText("Seleccionar");
+        btnSeleccionMov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionMovActionPerformed(evt);
+            }
+        });
+
+        btnVolver1.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver1.setText("Busqueda");
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
+
+        btnMovimiento2.setBackground(new java.awt.Color(0, 0, 0));
+        btnMovimiento2.setForeground(new java.awt.Color(255, 255, 255));
+        btnMovimiento2.setText("Actualizar");
+        btnMovimiento2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMovimiento2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout actualizarLayout = new javax.swing.GroupLayout(actualizar);
+        actualizar.setLayout(actualizarLayout);
+        actualizarLayout.setHorizontalGroup(
+            actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actualizarLayout.createSequentialGroup()
                 .addGap(86, 86, 86)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(actualizarLayout.createSequentialGroup()
                         .addComponent(txtIDproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
                         .addComponent(txtFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(actualizarLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -221,32 +243,66 @@ public class ProductoBusqueda extends javax.swing.JFrame {
                         .addGap(145, 145, 145)
                         .addComponent(jLabel3)
                         .addGap(128, 128, 128))))
+            .addGroup(actualizarLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(actualizarLayout.createSequentialGroup()
+                        .addComponent(btnVolver)
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(actualizarLayout.createSequentialGroup()
+                        .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, actualizarLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVolver1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, actualizarLayout.createSequentialGroup()
+                                .addComponent(btnMovimiento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMovimientoGrafico))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(actualizarLayout.createSequentialGroup()
+                                .addComponent(btnMovimiento2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSeleccionMov)))
+                        .addGap(0, 38, Short.MAX_VALUE))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        actualizarLayout.setVerticalGroup(
+            actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(actualizarLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
                     .addComponent(jLabel1))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(45, 45, 45)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionMov)
+                    .addComponent(btnMovimiento2))
+                .addGap(26, 26, 26)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIDproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(btnMovimiento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 33, Short.MAX_VALUE)
+                .addGroup(actualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMovimiento)
+                    .addComponent(btnMovimientoGrafico))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -256,11 +312,11 @@ public class ProductoBusqueda extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(actualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -273,7 +329,6 @@ public class ProductoBusqueda extends javax.swing.JFrame {
     private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
 
         obj.setRowFilter(RowFilter.regexFilter(id.getText()));
-
 
     }//GEN-LAST:event_idKeyPressed
 
@@ -288,13 +343,17 @@ public class ProductoBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIDproductoActionPerformed
 
     private void btnMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimientoActionPerformed
-//        String producto = txtIDproducto.getText();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha1 = sdf.format(txtFecha1.getDate()); 
-        String fecha2 = sdf.format(txtFecha2.getDate()); 
-        String codProducto = txtIDproducto.getText();
 
-    lista = dao.productoMovimiento(fecha1, fecha2, codProducto);
+        btnMovimientoGrafico.setEnabled(true);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha1 = sdf.format(txtFecha1.getDate());
+        String fecha2 = sdf.format(txtFecha2.getDate());
+        String codProducto = txtIDproducto.getText();
+        
+        Memoria.put("graficoMovProductoCOD", codProducto);
+        Memoria.put("graficoMovProductoFECHA1", fecha1);
+        Memoria.put("graficoMovProductoFECHA2", fecha2);
+        lista = dao.productoMovimiento(fecha1, fecha2, codProducto);
         model1.setRowCount(0);
         for (Producto prov : lista) {
             Object[] objeto = new Object[3];
@@ -304,6 +363,51 @@ public class ProductoBusqueda extends javax.swing.JFrame {
             model1.addRow(objeto);
         }
     }//GEN-LAST:event_btnMovimientoActionPerformed
+
+    private void btnMovimientoGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimientoGraficoActionPerformed
+        btnMovimientoGrafico.setEnabled(false);
+        ProductoGraficoMov.main(null);
+        
+        
+    }//GEN-LAST:event_btnMovimientoGraficoActionPerformed
+
+    private void btnSeleccionMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionMovActionPerformed
+        try {
+            txtIDproducto.setText(model.getValueAt(tblBuscar1.getSelectedRow(), 0).toString());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila en tabla",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnSeleccionMovActionPerformed
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        productoSelect();
+        List<Integer> busqueda = new ArrayList<>();
+
+        recurisvidad(model, id.getText(), 0, busqueda);
+
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if (!busqueda.contains(i)) {
+                model.removeRow(i);
+            }
+        }
+    }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void btnMovimiento2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimiento2ActionPerformed
+        productoSelect();
+    }//GEN-LAST:event_btnMovimiento2ActionPerformed
+    private void recurisvidad(DefaultTableModel model, Object filtro, int fila, List<Integer> resultadoFila) {
+        if (fila < model.getRowCount()) {
+            Object columnaFiltro = model.getValueAt(fila, 0);
+            if (columnaFiltro != null && columnaFiltro.equals(filtro)) {
+                resultadoFila.add(fila);
+            }
+            recurisvidad(model, filtro, fila + 1, resultadoFila);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -358,16 +462,22 @@ public class ProductoBusqueda extends javax.swing.JFrame {
             model.addRow(objeto);
         }
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel actualizar;
     private javax.swing.JButton btnMovimiento;
+    private javax.swing.JButton btnMovimiento2;
+    private javax.swing.JButton btnMovimientoGrafico;
+    private javax.swing.JButton btnSeleccionMov;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnVolver1;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

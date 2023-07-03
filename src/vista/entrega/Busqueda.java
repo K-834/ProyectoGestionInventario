@@ -18,7 +18,7 @@ import vista.Menu;
  *
  * @author Anghello
  */
-public class Caduca extends javax.swing.JFrame {
+public class Busqueda extends javax.swing.JFrame {
 
     private DaoDatos dao;
     private List<Datos> lista;
@@ -26,7 +26,7 @@ public class Caduca extends javax.swing.JFrame {
     private Datos data;
     TableRowSorter<DefaultTableModel> obj;
 
-    public Caduca() {
+    public Busqueda() {
 
         initComponents();
         model = (DefaultTableModel) tblBuscar.getModel();
@@ -198,14 +198,18 @@ public class Caduca extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Caduca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -215,7 +219,7 @@ public class Caduca extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Datos data = new Datos();
-                Caduca bus = new Caduca();
+                Busqueda bus = new Busqueda();
                 bus.setLocationRelativeTo(null);
                 bus.setVisible(true);
                 //    new Caduca().setVisible(true);

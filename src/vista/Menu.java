@@ -5,7 +5,7 @@
 package vista;
 
 import javax.swing.JOptionPane;
-import vista.entrega.Caduca;
+import vista.entrega.Busqueda;
 import vista.entrega.Eliminar;
 import vista.entrega.Añadir;
 import util.Memoria;
@@ -370,7 +370,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Caduca.main(null);
+        Busqueda.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 

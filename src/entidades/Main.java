@@ -35,11 +35,10 @@ public class Main {
 //    {"17", "Camote", "08", "19/09/2023", "1"},
 //    {"18", "Papa", "20", "28/12/2023", "1"},
 //    {"19", "Papa", "10", "16/08/2023", "0"}
-//};
+//}; 
 
-       
-//        inventario.setTablaComunicadas(datos);
-//        
+
+//         inventario.setTablaComunicadas(datos);
 //        System.out.println("Datos ingresados:");
 //        for (int i = 0; i < datos.length; i++) {
 //            for (int j = 0; j < datos[i].length; j++) {
