@@ -319,7 +319,7 @@ public class ProductoMenu extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ProductoBusqueda.main(null);
+        ProductoBuscar.main(null);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
