@@ -13,6 +13,7 @@ import java.util.List;
  * @author antho
  */
 public interface DaoDatos {
+    
     String getMensaje();
      
     List<Datos> datosSelect();

@@ -321,7 +321,7 @@ public class UsuarioDatosComparar extends javax.swing.JFrame {
             pack();
             repaint();
         } catch (Exception e) {
-            System.out.println(daoH.getMensaje());;
+            System.out.println(daoH.getMensaje());
         }
 
     }//GEN-LAST:event_btnVerDatosActionPerformed
@@ -363,17 +363,6 @@ public class UsuarioDatosComparar extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UsuarioDatosComparar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

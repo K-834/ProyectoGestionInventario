@@ -6,7 +6,7 @@ package vista.producto;
 
 import vista.*;
 import javax.swing.JOptionPane;
-import vista.entrega.Caduca;
+import vista.entrega.Busqueda;
 import vista.entrega.Eliminar;
 import vista.entrega.Añadir;
 import util.Memoria;
