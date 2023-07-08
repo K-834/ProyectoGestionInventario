@@ -5,15 +5,14 @@
 package vista.proveedores;
 
 
-import vista.producto.*;
 import dao.DaoProveedores;
 import dao.impl.DaoImplProveedores;
 import entidades.Proveedores;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
-import vista.Menu;
 
 /**
  *
@@ -56,6 +55,7 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
         id = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuscar = new javax.swing.JTable();
+        btnVolver1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
@@ -112,6 +112,16 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblBuscar);
 
+        btnVolver1.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver1.setText("Busqueda");
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,7 +137,9 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVolver1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnVolver)
                                 .addGap(163, 163, 163)
@@ -141,13 +153,14 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
                     .addComponent(jLabel1))
-                .addGap(46, 46, 46)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,6 +194,28 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        datosSelect();
+        
+        List<Integer> busqueda = new ArrayList<>();
+
+        recurisvidad(model, id.getText(), 0, busqueda);
+
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if (!busqueda.contains(i)) {
+                model.removeRow(i);
+            }
+        }
+    }//GEN-LAST:event_btnVolver1ActionPerformed
+    private void recurisvidad(DefaultTableModel model, Object filtro, int fila, List<Integer> resultadoFila) {
+        if (fila < model.getRowCount()) {
+            Object columnaFiltro = model.getValueAt(fila, 0);
+            if (columnaFiltro != null && columnaFiltro.equals(filtro)) {
+                resultadoFila.add(fila);
+            }
+            recurisvidad(model, filtro, fila + 1, resultadoFila);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -206,10 +241,6 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ProveedoresBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -244,6 +275,7 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnVolver1;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

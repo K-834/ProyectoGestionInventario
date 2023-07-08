@@ -4,10 +4,10 @@
  */
 package vista.entrega;
 
-import vista.reportes.ViewReporte;
 import dao.DaoDatos;
 import dao.impl.DaoImplDatos;
 import entidades.Datos;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
@@ -196,9 +196,29 @@ public class Busqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1ActionPerformed
+        datosSelect();
+        List<Integer> busqueda = new ArrayList<>();
+        recurisvidad(model, id.getText(), 0, busqueda);
 
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if (!busqueda.contains(i)) {
+                model.removeRow(i);
+            }
+        }
+    }//GEN-LAST:event_btnVolver1ActionPerformed
+    private void recurisvidad(DefaultTableModel model, Object filtro, int fila, List<Integer> resultadoFila) {
+        if (fila < model.getRowCount()) {
+            Object columnaFiltro = model.getValueAt(fila, 0);
+            if (columnaFiltro != null && columnaFiltro.equals(filtro)) {
+                resultadoFila.add(fila);
+            }
+            recurisvidad(model, filtro, fila + 1, resultadoFila);
+        }
+    }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
