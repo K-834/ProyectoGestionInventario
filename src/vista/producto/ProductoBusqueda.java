@@ -385,6 +385,7 @@ public class ProductoBusqueda extends javax.swing.JFrame {
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         productoSelect();
+        
         List<Integer> busqueda = new ArrayList<>();
 
         recurisvidad(model, id.getText(), 0, busqueda);
@@ -395,10 +396,6 @@ public class ProductoBusqueda extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnVolver1ActionPerformed
-
-    private void btnMovimiento2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimiento2ActionPerformed
-        productoSelect();
-    }//GEN-LAST:event_btnMovimiento2ActionPerformed
     private void recurisvidad(DefaultTableModel model, Object filtro, int fila, List<Integer> resultadoFila) {
         if (fila < model.getRowCount()) {
             Object columnaFiltro = model.getValueAt(fila, 0);
@@ -408,6 +405,12 @@ public class ProductoBusqueda extends javax.swing.JFrame {
             recurisvidad(model, filtro, fila + 1, resultadoFila);
         }
     }
+    
+    
+    private void btnMovimiento2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimiento2ActionPerformed
+        productoSelect();
+    }//GEN-LAST:event_btnMovimiento2ActionPerformed
+
 
     /**
      * @param args the command line arguments
