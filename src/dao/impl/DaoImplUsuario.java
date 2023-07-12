@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import util.Conexion;
 
 /**
@@ -60,8 +61,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 lista.add(dataUs);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
-        }
+           // mensaje = e.getMessage();
+JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);        }
         return lista;
 
     }
@@ -89,7 +92,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 mensaje = "Cero registros actualizados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);   
         }
         return mensaje;
     }
@@ -121,8 +127,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 mensaje = "Cero registros agregados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
-            System.out.println(mensaje);
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -141,7 +149,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 mensaje = "Cero registros actualizados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -160,7 +171,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 mensaje = "Cero registros actualizados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -193,7 +207,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 lista.add(dataUs);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return lista;
 
@@ -224,7 +241,10 @@ public class DaoImplUsuario implements DaoUsuario {
                 adm.setImagen(resultado.getBytes(5));
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return adm;
 

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import util.Conexion;
 
 /**
@@ -53,7 +54,10 @@ public class DaoImplHistorial implements DaoHistorial {
                 lista.add(histo);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return lista;
 
@@ -82,8 +86,10 @@ public class DaoImplHistorial implements DaoHistorial {
             }
             
         } catch (Exception e) {
-            mensaje = e.getMessage();
-            System.out.println(mensaje);
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
 
@@ -118,7 +124,10 @@ public class DaoImplHistorial implements DaoHistorial {
                 System.out.println(userG.getHistorialReporte());    
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return userG;
 

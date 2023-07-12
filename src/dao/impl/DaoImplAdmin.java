@@ -9,6 +9,7 @@ import entidades.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import util.Conexion;
 
 /**
@@ -47,8 +48,10 @@ public class DaoImplAdmin implements  DaoAdmin{
             
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
-            
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         
         return adm;
@@ -73,7 +76,10 @@ public class DaoImplAdmin implements  DaoAdmin{
                 System.out.println(adm.getNombre());
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return adm;
     

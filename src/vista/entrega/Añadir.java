@@ -64,7 +64,8 @@ public class Añadir extends javax.swing.JFrame {
 
     /**
      * Creates new form añadir
-     */
+    */
+    
     public Añadir() {
 
         initComponents();
@@ -412,10 +413,10 @@ public class Añadir extends javax.swing.JFrame {
 
             if (daoV.getNombre() != null) {
                 lblValidar.setText("Es valido : " + daoV.getNombre());
-                btnIngresar.setEnabled(true);
+                btnIngresar1.setEnabled(true);
 
             } else {
-                btnIngresar.setEnabled(false);
+                btnIngresar1.setEnabled(false);
                 lblValidar.setText("No es valido");
             }
 
@@ -482,6 +483,9 @@ public class Añadir extends javax.swing.JFrame {
             txtCantidad.setValue(0);
             buttonGroup1.clearSelection();
             txtProveedorCodigo.setText("");
+            txtProducto.setEnabled(true);
+            txtProveedorCodigo.setEnabled(true);
+            txtCantidad.setEnabled(true);
             datosSelect();
         } else {
             JOptionPane.showMessageDialog(null, "Falta Ingresar datos",
@@ -526,7 +530,6 @@ public class Añadir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Datos data = new Datos();
                 Añadir añadir1 = new Añadir();
                 añadir1.setLocationRelativeTo(null);
                 añadir1.setVisible(true);
