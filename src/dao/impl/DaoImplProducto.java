@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import util.Conexion;
 
 /**
@@ -55,7 +56,10 @@ public class DaoImplProducto implements DaoProducto {
                 lista.add(prod);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return lista;
 
@@ -80,7 +84,10 @@ public class DaoImplProducto implements DaoProducto {
                 mensaje = "Cero registros actualizados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -106,8 +113,10 @@ public class DaoImplProducto implements DaoProducto {
                 mensaje = "Cero registros agregados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
-            System.out.println(mensaje);
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
 
@@ -127,7 +136,10 @@ public class DaoImplProducto implements DaoProducto {
                 mensaje = "Cero registros eliminados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
 
@@ -147,7 +159,10 @@ public class DaoImplProducto implements DaoProducto {
                 mensaje = "Cero registros recuperados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
 
@@ -177,7 +192,10 @@ public class DaoImplProducto implements DaoProducto {
                 lista.add(prod);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+          //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return lista;
     }
@@ -197,7 +215,10 @@ public class DaoImplProducto implements DaoProducto {
             }
 
         } catch (Exception e) {
-            mensaje = "0";
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
 
@@ -230,7 +251,10 @@ public class DaoImplProducto implements DaoProducto {
 
             } 
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return lista;
 

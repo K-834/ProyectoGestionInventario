@@ -27,8 +27,10 @@ public class Conexion {
     public Connection getConexion() throws SQLException {
         Connection c = null;
         try {
+            
             Class.forName(DRIVER).newInstance();
             c = DriverManager.getConnection(URL, USER, PASS);
+
         } catch (ClassNotFoundException
                 | IllegalAccessException
                 | InstantiationException

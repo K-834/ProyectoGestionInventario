@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import util.Conexion;
 
 /**
@@ -61,7 +62,10 @@ public class DaoImplProveedores implements DaoProveedores {
                 lista.add(provee);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+           //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return lista;
     }
@@ -92,7 +96,10 @@ public class DaoImplProveedores implements DaoProveedores {
 
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -124,8 +131,10 @@ public class DaoImplProveedores implements DaoProveedores {
                 mensaje = "Cero registros agregados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
-            System.out.println(mensaje);
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -144,7 +153,10 @@ public class DaoImplProveedores implements DaoProveedores {
                 mensaje = "Cero registros actualizados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -163,7 +175,10 @@ public class DaoImplProveedores implements DaoProveedores {
                 mensaje = "Cero registros actualizados";
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return mensaje;
     }
@@ -198,7 +213,10 @@ public class DaoImplProveedores implements DaoProveedores {
                 listaProvee.add(provee);
             }
         } catch (Exception e) {
-            mensaje = e.getMessage();
+            //mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE); 
         }
         return listaProvee;
     }
