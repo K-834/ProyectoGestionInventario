@@ -522,7 +522,7 @@ public class Editar extends javax.swing.JFrame {
         try {
             daoV.setCodProducto(txtProducto.getText());
             daoP.datosSelect(daoV);
-            lblValidar.setText("Es valido : " + daoV.getNombre());
+            lblValidar.setText(daoV.getNombre());
             SeleccionBtn(!valido);
 
             if (daoV.getNombre() == null) {

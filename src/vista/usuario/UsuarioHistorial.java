@@ -202,7 +202,7 @@ public class UsuarioHistorial extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        UsuarioBuscarDatos.main(null);
+      //  UsuarioBuscarDatos.main(null);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -219,8 +219,8 @@ public class UsuarioHistorial extends javax.swing.JFrame {
             int n5 = Integer.parseInt(userH.getHistorialRecuperado());
             int n6 = Integer.parseInt(userH.getHistorialReporte());
             DefaultCategoryDataset tablaDatos = new DefaultCategoryDataset();
-            tablaDatos.setValue(n1, "Eliminar", empleado);
-            tablaDatos.setValue(n2, "Añadir", empleado);
+            tablaDatos.setValue(n1, "Añadir", empleado);
+            tablaDatos.setValue(n2, "Eliminar", empleado);
             tablaDatos.setValue(n3, "Editar", empleado);
             tablaDatos.setValue(n4, "Logeado", empleado);
             tablaDatos.setValue(n5, "Recuperado", empleado);
@@ -236,7 +236,7 @@ public class UsuarioHistorial extends javax.swing.JFrame {
             pack();
             repaint();
         } catch (Exception e) {
-            System.out.println(daoH.getMensaje());;
+            System.out.println(daoH.getMensaje());
         }
     }//GEN-LAST:event_btnVerDatosActionPerformed
 

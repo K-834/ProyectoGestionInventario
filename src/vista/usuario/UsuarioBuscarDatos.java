@@ -297,10 +297,9 @@ public class UsuarioBuscarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-          datosSelect();
+        datosSelect();
         
         List<Integer> busqueda = new ArrayList<>();
-
         recurisvidad(model, Id.getText(), 0, busqueda);
 
         for (int i = model.getRowCount() - 1; i >= 0; i--) {

@@ -64,17 +64,17 @@ public class ViewReporte extends javax.swing.JFrame {
         tblReporte = new javax.swing.JTable();
         txtIDreporte = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cboTipoReporte = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtaReporte = new javax.swing.JTextArea();
         btnSeleccion = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtTituloReporte = new javax.swing.JTextField();
+        cboTipoReporte = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtIDreporte1 = new javax.swing.JTextField();
         btnRealizado = new javax.swing.JButton();
+        txtTituloReporte1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,13 +156,6 @@ public class ViewReporte extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Titulo:");
 
-        cboTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrega de producto", "Error de entrega de producto", "Daños al producto ", "Otros" }));
-        cboTipoReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboTipoReporteActionPerformed(evt);
-            }
-        });
-
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,10 +190,10 @@ public class ViewReporte extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("ID:");
 
-        txtTituloReporte.setToolTipText("a");
-        txtTituloReporte.addActionListener(new java.awt.event.ActionListener() {
+        cboTipoReporte.setToolTipText("a");
+        cboTipoReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTituloReporteActionPerformed(evt);
+                cboTipoReporteActionPerformed(evt);
             }
         });
 
@@ -226,10 +219,21 @@ public class ViewReporte extends javax.swing.JFrame {
             }
         });
 
+        txtTituloReporte1.setToolTipText("a");
+        txtTituloReporte1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTituloReporte1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(309, 309, 309))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -242,41 +246,38 @@ public class ViewReporte extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtIDreporte, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSeleccion))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(596, 596, 596))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane2)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cboTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4))
-                                        .addGap(67, 67, 67)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(txtTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtIDreporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(txtIDreporte, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(52, 52, 52)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtIDreporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jScrollPane2)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(257, 257, 257)
+                                            .addComponent(jLabel3))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(6, 6, 6)
+                                            .addComponent(cboTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                            .addComponent(txtTituloReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSeleccion))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVolver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRealizado)
                         .addGap(8, 8, 8)))
                 .addContainerGap(17, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(309, 309, 309))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,19 +298,19 @@ public class ViewReporte extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(txtIDreporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(txtIDreporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)))
+                            .addComponent(txtIDreporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btnSeleccion)))
-                .addGap(21, 21, 21)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTituloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtTituloReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +318,7 @@ public class ViewReporte extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
                     .addComponent(btnRealizado))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -365,10 +366,6 @@ public class ViewReporte extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDreporteActionPerformed
 
-    private void cboTipoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoReporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboTipoReporteActionPerformed
-
     private void btnSeleccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeleccionMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSeleccionMouseClicked
@@ -376,23 +373,10 @@ public class ViewReporte extends javax.swing.JFrame {
     private void btnSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionActionPerformed
         // TODO add your handling code here:
         try {
-            String combo = model.getValueAt(tblReporte.getSelectedRow(), 2).toString();
-            if ("Entrega de producto".equals(combo)) {
-                cboTipoReporte.setSelectedIndex(1);
-            }
-            if (" Error de entrega de producto".equals(combo)) {
-                cboTipoReporte.setSelectedIndex(2);
-            }
-            if ("Daños al producto".equals(combo)) {
-                cboTipoReporte.setSelectedIndex(3);
-            }
-            if ("Otros".equals(combo)) {
-                cboTipoReporte.setSelectedIndex(4);
-            }
-
+            cboTipoReporte.setText(model.getValueAt(tblReporte.getSelectedRow(), 2).toString());
             txtIDreporte.setText(model.getValueAt(tblReporte.getSelectedRow(), 0).toString());
             txtIDreporte1.setText(model.getValueAt(tblReporte.getSelectedRow(), 1).toString());
-            txtTituloReporte.setText(model.getValueAt(tblReporte.getSelectedRow(), 3).toString());
+            txtTituloReporte1.setText(model.getValueAt(tblReporte.getSelectedRow(), 3).toString());
             txtaReporte.setText(model.getValueAt(tblReporte.getSelectedRow(), 4).toString());
             seleccion = true;
         } catch (Exception e) {
@@ -403,9 +387,9 @@ public class ViewReporte extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSeleccionActionPerformed
 
-    private void txtTituloReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloReporteActionPerformed
+    private void cboTipoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoReporteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTituloReporteActionPerformed
+    }//GEN-LAST:event_cboTipoReporteActionPerformed
 
     private void txtIDreporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDreporte1ActionPerformed
         // TODO add your handling code here:
@@ -429,7 +413,7 @@ public class ViewReporte extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
             txtIDreporte.setText("");
             txtIDreporte1.setText("");
-            txtTituloReporte.setText("");
+            cboTipoReporte.setText("");
             txtaReporte.setText("");
                 
             } else {
@@ -449,6 +433,10 @@ public class ViewReporte extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_btnRealizadoActionPerformed
+
+    private void txtTituloReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloReporte1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTituloReporte1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -504,7 +492,7 @@ public class ViewReporte extends javax.swing.JFrame {
             objeto[1] = report.getCodEmpleado();
             objeto[2] = report.getTipo();
             objeto[3] = report.getTitulo();
-            objeto[4] = report.getIdReporte();
+            objeto[4] = report.getReporte();
             model.addRow(objeto);
         }
 
@@ -515,7 +503,7 @@ public class ViewReporte extends javax.swing.JFrame {
     private javax.swing.JButton btnRealizado;
     private javax.swing.JButton btnSeleccion;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JComboBox<String> cboTipoReporte;
+    private javax.swing.JTextField cboTipoReporte;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -531,7 +519,7 @@ public class ViewReporte extends javax.swing.JFrame {
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtIDreporte;
     private javax.swing.JTextField txtIDreporte1;
-    private javax.swing.JTextField txtTituloReporte;
+    private javax.swing.JTextField txtTituloReporte1;
     private javax.swing.JTextArea txtaReporte;
     // End of variables declaration//GEN-END:variables
 }

@@ -100,7 +100,7 @@ public class DaoImplProducto implements DaoProducto {
                 .append("nombre, ")
                 .append("categoria, ")
                 .append("cantidad, ")
-                .append("estado")
+                .append("estado ")
                 .append(") VALUES (?,?,?,?,1)");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
