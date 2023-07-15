@@ -5,8 +5,9 @@
 package dao.impl;
 
 import dao.DaoUsuario;
-import entidades.Datos;
 import entidades.Usuario;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,10 +62,11 @@ public class DaoImplUsuario implements DaoUsuario {
                 lista.add(dataUs);
             }
         } catch (Exception e) {
-           // mensaje = e.getMessage();
-JOptionPane.showMessageDialog(null, "ERROR",
+            // mensaje = e.getMessage();
+            JOptionPane.showMessageDialog(null, "ERROR",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE);        }
+                    JOptionPane.ERROR_MESSAGE);
+        }
         return lista;
 
     }
@@ -95,14 +97,13 @@ JOptionPane.showMessageDialog(null, "ERROR",
             //mensaje = e.getMessage();
             JOptionPane.showMessageDialog(null, "ERROR",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE);   
+                    JOptionPane.ERROR_MESSAGE);
         }
         return mensaje;
     }
 
     @Override
     public String UsuarioInsertar(Usuario dataUs) {
-
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO usuario(")
                 .append("idUsuario, ")
@@ -112,8 +113,9 @@ JOptionPane.showMessageDialog(null, "ERROR",
                 .append("telefono, ")
                 .append("nivelSeguridad, ")
                 .append("estado, ")
-                .append("contraseña ")
-                .append(") VALUES (?,?,?,?,?,1,1,?)");
+                .append("contraseña, ")
+                .append("imagen")
+                .append(") VALUES (?,?,?,?,?,1,1,?,?)");
         try (Connection cn = conexion.getConexion()) {
             PreparedStatement ps = cn.prepareStatement(sql.toString());
             ps.setString(1, dataUs.getCodigo());
@@ -122,15 +124,16 @@ JOptionPane.showMessageDialog(null, "ERROR",
             ps.setString(4, dataUs.getCorreo());
             ps.setInt(5, dataUs.getTelefono());
             ps.setString(6, dataUs.getContraseña());
+            ps.setBytes(7, dataUs.getImagen());
             int resultado = ps.executeUpdate();
             if (resultado == 0) {
                 mensaje = "Cero registros agregados";
             }
         } catch (Exception e) {
-            //mensaje = e.getMessage();
-            JOptionPane.showMessageDialog(null, "ERROR",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE); 
+            mensaje = e.getMessage();
+//            JOptionPane.showMessageDialog(null, "ERROR",
+//                    "Error",
+//                    JOptionPane.ERROR_MESSAGE);
         }
         return mensaje;
     }
@@ -152,7 +155,7 @@ JOptionPane.showMessageDialog(null, "ERROR",
             //mensaje = e.getMessage();
             JOptionPane.showMessageDialog(null, "ERROR",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE); 
+                    JOptionPane.ERROR_MESSAGE);
         }
         return mensaje;
     }
@@ -174,7 +177,7 @@ JOptionPane.showMessageDialog(null, "ERROR",
             //mensaje = e.getMessage();
             JOptionPane.showMessageDialog(null, "ERROR",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE); 
+                    JOptionPane.ERROR_MESSAGE);
         }
         return mensaje;
     }
@@ -210,10 +213,9 @@ JOptionPane.showMessageDialog(null, "ERROR",
             //mensaje = e.getMessage();
             JOptionPane.showMessageDialog(null, "ERROR",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE); 
+                    JOptionPane.ERROR_MESSAGE);
         }
         return lista;
-
     }
 
     @Override
@@ -244,7 +246,7 @@ JOptionPane.showMessageDialog(null, "ERROR",
             //mensaje = e.getMessage();
             JOptionPane.showMessageDialog(null, "ERROR",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE); 
+                    JOptionPane.ERROR_MESSAGE);
         }
         return adm;
 

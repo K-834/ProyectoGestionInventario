@@ -208,7 +208,7 @@ public class Busqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1ActionPerformed
     private void recurisvidad(DefaultTableModel model, Object filtro, int fila, List<Integer> resultadoFila) {
         if (fila < model.getRowCount()) {
-            Object columnaFiltro = model.getValueAt(fila, 0);
+            Object columnaFiltro = model.getValueAt(fila, 1);
             if (columnaFiltro != null && columnaFiltro.equals(filtro)) {
                 resultadoFila.add(fila);
             }

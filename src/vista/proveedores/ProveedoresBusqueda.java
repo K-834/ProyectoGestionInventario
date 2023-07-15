@@ -99,11 +99,11 @@ public class ProveedoresBusqueda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Producto", "Cantidad", "Fecha de Entrega", "Fecha de Caducidad"
+                "ID", "Nombre", "Direccion", "Email", "TipoDoc", "Documento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+                false, false, true, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

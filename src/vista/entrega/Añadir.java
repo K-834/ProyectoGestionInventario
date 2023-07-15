@@ -486,6 +486,8 @@ public class Añadir extends javax.swing.JFrame {
             txtProducto.setEnabled(true);
             txtProveedorCodigo.setEnabled(true);
             txtCantidad.setEnabled(true);
+            lblValidar.setText("");
+            lblSeleccionAlmacen.setText("");
             datosSelect();
         } else {
             JOptionPane.showMessageDialog(null, "Falta Ingresar datos",

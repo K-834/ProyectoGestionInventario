@@ -297,15 +297,15 @@ public class UsuarioDatosComparar extends javax.swing.JFrame {
             int m5 = Integer.parseInt(userH.getHistorialRecuperado());
             int m6 = Integer.parseInt(userH.getHistorialReporte());
             DefaultCategoryDataset tablaDatos = new DefaultCategoryDataset();
-            tablaDatos.setValue(n1, "Eliminar", empleado);
-            tablaDatos.setValue(n2, "Añadir", empleado);
+            tablaDatos.setValue(n1, "Añadir", empleado);
+            tablaDatos.setValue(n2, "Eliminar", empleado);
             tablaDatos.setValue(n3, "Editar", empleado);
             tablaDatos.setValue(n4, "Logeado", empleado);
             tablaDatos.setValue(n5, "Recuperado", empleado);
             tablaDatos.setValue(n6, "Reporte", empleado);
 
-            tablaDatos.setValue(m1, "Eliminar", empleado2);
-            tablaDatos.setValue(m2, "Añadir", empleado2);
+            tablaDatos.setValue(m1, "Añadir", empleado2);
+            tablaDatos.setValue(m2, "Eliminar", empleado2);
             tablaDatos.setValue(m3, "Editar", empleado2);
             tablaDatos.setValue(m4, "Logeado", empleado2);
             tablaDatos.setValue(m5, "Recuperado", empleado2);

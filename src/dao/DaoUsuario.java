@@ -12,19 +12,20 @@ import java.util.List;
  * @author antho
  */
 public interface DaoUsuario {
+
     String getMensaje();
-     
+
     List<Usuario> UsuarioSelect();
-    
+
     String UsuarioEditar(Usuario dataUs);
-    
+
     String UsuarioInsertar(Usuario dataUs);
-    
+
     String UsuarioEliminar(Usuario dataUs);
-    
+
     String UsuarioRecuperar(Usuario dataUs);
-    
+
     List<Usuario> UsuarioSelectEliminados();
-    
+
     Usuario UsuarioPerfil(String usuario);
 }
